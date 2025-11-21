@@ -26,8 +26,8 @@ João Vitor Romero Sales, Estudante de Engenharia de Software na Pontifícia Uni
 João Vitor Romero Sales, como pesquisador principal e executor do trabalho, responsável pelas decisões científicas, execução do experimento e análise de resultados.
 
 ### 1.7 Projeto / produto / iniciativa relacionada
-Trabalho de Conclusão de Curso (TCC) de Engenharia de Software, vinculado ao curso de graduação na Pontifícia Universidade Católica de Minas Gerais, com foco na iniciativa acadêmica de experimentação em DevOps e integração de Inteligência Artificial em pipelines de Infraestrutura como Código (IaC). 
-Relaciona-se a tendências emergentes em automação de IaC, como MLOps e DevSecOps, além de cloud computing.
+Trabalho Final de Medição e Experimentação de Software – Engenharia de Software 
+Tema: Análise Comparativa da Qualidade de Código Terraform Gerado por Ferramentas de Inteligência Artificial em Ambientes Multi-Cloud (AWS e Azure)
 
 ## 2. Contexto e problema
 
