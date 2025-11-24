@@ -51,54 +51,138 @@ No âmbito empírico, o framework proposto por Sellam et al. (2019) para a medi�
 Analisar para fins de melhoria na adoção de IA em DevOps, a qualidade de código Terraform gerado por ferramentas de Inteligência Artificial (Chat-GPT, Google Gemini e Claude AI), sob a perspectiva de conformidade, segurança e manutenibilidade, em um contexto de infraestruturas multi-cloud (AWS e Azure) com 50 prompts variados em clareza.
 
 ### 3.2 Objetivos específicos
-Decomponha o objetivo geral em metas mais focadas (O1, O2, etc.), que descrevam resultados concretos de aprendizado ou decisão que o experimento deve gerar.
+O1: Gerar e coletar 150 amostras de código Terraform (50 prompts × 3 ferramentas de IA) representativas de cenários DevOps reais em AWS e Azure, garantindo variabilidade controlada na clareza dos prompts.
+O2: Quantificar sistematicamente as métricas de qualidade do código gerado, utilizando ferramentas de análise estática automatizadas, para caracterizar o desempenho individual de cada ferramenta de IA.
+O3: Comparar o desempenho relativo das ferramentas de IA (Chat-GPT, Google Gemini e Claude AI) em termos de conformidade, segurança e manutenibilidade, identificando padrões por provedor de cloud e tipo de prompt.
+O4: Derivar recomendações práticas e evidências empíricas para a integração segura de IA generativa em fluxos de trabalho DevOps multi-cloud, incluindo diretrizes para otimização de prompts e revisão automatizada.
 
 ### 3.3 Questões de pesquisa / de negócio
-Q1: Qual ferramenta de IA (Chat-GPT, Google Gemini e Claude AI) produz código Terraform com maior conformidade às boas práticas de IaC em ambientes AWS e Azure?
-Q2: Como a clareza dos prompts afeta a quantidade de vulnerabilidades e o uso de valores hard-coded encontrados no código gerado?
-Q3: Quais são as implicações práticas da qualidade do IaC gerado por IA para equipes DevOps em contextos multi-cloud?
+**O1 - Geração e Coleta de Amostras:**
+Q1.1: Qual é a taxa de geração bem-sucedida de código Terraform sintaticamente válido por cada ferramenta de IA?
+Q1.2: Como a clareza dos prompts influencia a completude estrutural do código gerado (presença de recursos essenciais)?
+Q1.3: Há diferenças na estruturação inicial do código gerado entre AWS e Azure para prompts equivalentes?
+
+**O2 - Quantificação de Métricas:**
+Q2.1: Qual o nível de conformidade com boas práticas de IaC exibido pelo código de cada ferramenta?
+Q2.2: Quantas vulnerabilidades de segurança são introduzidas pelo código gerado por cada IA?
+Q2.3: Qual a prevalência de valores hard-coded no código produzido por cada ferramenta?
+
+**O3 - Comparação de Desempenho:**
+Q3.1: Qual ferramenta de IA apresenta melhor desempenho global em conformidade para AWS versus Azure?
+Q3.2: Como as ferramentas diferem na detecção e mitigação automática de vulnerabilidades de segurança?
+Q3.3: Há correlação entre clareza do prompt e redução de valores hard-coded nas diferentes IAs?
+
+**O4 - Recomendações Práticas:**
+Q4.1: Quais padrões de prompts otimizam a qualidade do código gerado pelas melhores ferramentas identificadas?
+Q4.2: Qual o impacto potencial da qualidade observada no tempo de revisão humana em pipelines DevOps?
+Q4.3: Quais ferramentas complementares de linting são mais eficazes para mitigar falhas das IAs?
 
 ### 3.4 Métricas associadas (GQM)
-Associe a cada questão as métricas que serão usadas para respondê-la, com nome, definição, unidade e fonte dos dados, garantindo alinhamento entre G, Q e M.
+#### Tabela GQM: Alinhamento Objetivo-Pergunta-Métrica
+
+| Objetivo | Pergunta | Métricas Associadas |
+| :-- | :-- | :-- |
+| **O1** | Q1.1 | Taxa de Validação Sintática [%], Tempo de Geração [s] |
+| **O1** | Q1.2 | Índice de Completude Estrutural [%], Cobertura de Outputs [%] |
+| **O1** | Q1.3 | Densidade de Recursos Específicos por Cloud [recursos/arquivo] |
+| **O2** | Q2.1 | Taxa de Conformidade TFLint [%], Pontuação de Boas Práticas [0-10] |
+| **O2** | Q2.2 | Contagem de Vulnerabilidades Checkov [\#], Gravidade Média de Vulnerabilidades [1-10] |
+| **O2** | Q2.3 | Contagem de Hard-Coded Values [\#], Taxa de Parametrização [%] |
+| **O3** | Q3.1 | Ranking de Conformidade por Cloud [posição 1-3], Delta Conformidade AWS-Azure [%] |
+| **O3** | Q3.2 | Taxa de Redução de Vulnerabilidades por IA [%], False Positives em Segurança [%] |
+| **O3** | Q3.3 | Correlação Prompt Qualidade-Hard-Coded [r Pearson], Threshold de Clareza [%] |
+| **O4** | Q4.1 | Eficiência de Prompts Otimizados [% melhoria], Variabilidade Intra-Prompt [DP] |
+| **O4** | Q4.2 | Tempo Estimado de Revisão Manual [min/arquivo], Redução Estimada de Revisão [%] |
+| **O4** | Q4.3 | Eficácia de Linting Complementar [% correção], Cobertura de Regras Ativas [%] |
+
+#### Tabela Completa de Métricas
+
+| Métrica | Descrição | Unidade |
+| :-- | :-- | :-- |
+| Taxa de Validação Sintática | Percentual de códigos que passam em `terraform validate` sem erros | % (0-100) |
+| Tempo de Geração | Tempo médio desde envio do prompt até recebimento do código completo | segundos (s) |
+| Índice de Completude Estrutural | Percentual de recursos essenciais presentes conforme especificação do prompt | % (0-100) |
+| Cobertura de Outputs | Percentual de blocos `resource` com definições `output` correspondentes | % (0-100) |
+| Densidade de Recursos Específicos por Cloud | Média de recursos cloud-specific por arquivo (.tf) | recursos/arquivo |
+| Taxa de Conformidade TFLint | Percentual de regras TFLint (AWS/Azurerm rulesets) atendidas | % (0-100) |
+| Pontuação de Boas Práticas | Pontuação composta (0-10) baseada em checklist manual de 10 itens Terraform | escala 0-10 |
+| Contagem de Vulnerabilidades Checkov | Número total de vulnerabilidades detectadas por Checkov | contagem (\#) |
+| Gravidade Média de Vulnerabilidades | Média da severidade atribuída por Checkov (CRITICAL=10, HIGH=8, etc.) | escala 1-10 |
+| Contagem de Hard-Coded Values | Número de valores fixos detectados (chaves API, IPs, regiões, etc.) | contagem (\#) |
+| Taxa de Parametrização | Percentual de configurações que utilizam variáveis ao invés de literais | % (0-100) |
+| Ranking de Conformidade por Cloud | Posição relativa (1-3) da IA com melhor conformidade por provedor | posição 1-3 |
+| Delta Conformidade AWS-Azure | Diferença percentual de conformidade entre clouds para cada IA | % diferença |
+| Taxa de Redução de Vulnerabilidades | Redução percentual de vulnerabilidades após linting vs. código bruto | % (0-100) |
+| False Positives em Segurança | Percentual de alertas de segurança que são falsos positivos | % (0-100) |
+| Correlação Prompt Qualidade-Hard-Coded | Coeficiente de correlação de Pearson entre clareza do prompt e hard-coded | r (-1 a +1) |
+| Eficiência de Prompts Otimizados | Melhoria percentual na qualidade com prompts refinados vs. originais | % melhoria |
+| Tempo Estimado de Revisão Manual | Tempo médio estimado para revisão humana baseada em densidade de issues | minutos/arquivo |
+| Eficácia de Linting Complementar | Percentual de issues corrigidos automaticamente por TFLint/Checkov | % correção |
 
 ## 4. Escopo e contexto do experimento
 
 ### 4.1 Escopo funcional / de processo (incluído e excluído)
-Explique claramente o que será coberto (atividades, artefatos, equipes, módulos) e o que ficará fora do experimento, para evitar interpretações divergentes.
+**Incluído:** Geração automatizada de 150 códigos Terraform (.tf) a partir de 50 prompts variados, análise estática com TFLint (rulesets AWS/Azurerm) e Checkov, quantificação de 15 métricas GQM, comparação estatística entre Chat-GPT, Google Gemini e Claude AI, elaboração de recomendações. Artefatos: repositório GitHub com códigos versionados, dataset CSV com métricas, relatório analítico com visualizações.
+
+**Excluído:** Execução real de provisionamento (`terraform apply`), análise dinâmica de performance em runtime, avaliação de custo computacional das IAs, testes com outras linguagens IaC (Ansible, CloudFormation), análise de experiência do usuário nas interfaces das IAs, validação em produção ou com usuários reais.
 
 ### 4.2 Contexto do estudo (tipo de organização, projeto, experiência)
-Caracterize o contexto em que o estudo ocorrerá: tipo e tamanho de organização, tipo de projeto, criticidade e perfil de experiência dos participantes.
+O estudo será conduzido no âmbito de um trabalho do curso de Engenharia de Software, em uma universidade brasileira localizada em Belo Horizonte, Minas Gerais, caracterizando um contexto acadêmico de pesquisa individual. O projeto possui criticidade baixa (ambiente de simulação com contas AWS/Azure), executado por estudante com experiência em DevOps (AWS, Azure, Python, Git, Terraform), estatística e experimentação controlada, mas sem exposição a equipes industriais. A infraestrutura técnica compreende execução local (máquina pessoal), ferramentas CLI open-source e acesso via web às APIs de IA.
 
 ### 4.3 Premissas
-Liste as suposições consideradas verdadeiras para o plano funcionar (por exemplo, disponibilidade de ambiente, estabilidade do sistema), mesmo que não possam ser garantidas.
+- Estabilidade das APIs das ferramentas de IA (Chat-GPT, Gemini, Claude) durante período experimental.
+- Consistência nas versões dos modelos de IA testados (ex: GPT-5, Gemini 2.5 Pro, Claude 4.5 Sonnet).
+- Contas AWS/Azure que suportam simulações de `terraform plan` sem interrupções por custo.
+- Ferramentas de linting (TFLint, Checkov) mantêm compatibilidade com Terraform v1.7+ e providers AWS/Azurerm atualizados.
+- Prompts elaborados são representativos de cenários DevOps reais.
 
 ### 4.4 Restrições
-Registre limitações práticas como tempo, orçamento, ferramentas, acessos ou regras organizacionais que impõem limites ao desenho.
+- Orçamento limitado a R$200 (acesso pago às IAs e contas AWS/Azure).
+- Prazo de execução alinhado ao cronograma acadêmico.
+- Amostra fixa de 50 prompts (150 códigos) devido a limitações manuais de coleta.
+- Ausência de ambiente de staging dedicado; testes limitados a `plan` local.
+- Dependência de disponibilidade das APIs de IA (limites de taxa, filas).
 
 ### 4.5 Limitações previstas
-Explique fatores que podem prejudicar a generalização dos resultados (validez externa), como contexto muito específico ou amostra pouco representativa.
+A generalização externa é limitada pela amostra acadêmica (50 prompts controlados vs uso orgânico em produção), ausência de validação com desenvolvedores reais e foco exclusivo em Terraform (não generaliza para outros IaC). Viés de seleção pode ocorrer por prompts elaborados pelo autor. A análise estática não captura falhas de runtime ou performance. Resultados são específicos às versões de IA de Novembro de 2025 e podem depreciar com atualizações dos modelos.
 
 ## 5. Stakeholders e impacto esperado
 
 ### 5.1 Stakeholders principais
-Liste os grupos ou papéis que têm interesse ou serão impactados pelo experimento (por exemplo, devs, QA, produto, gestores, clientes internos).
+- **Estudante/Autor (Pesquisador Principal):** Executor e beneficiário direto do trabalho.
+- **Professor Orientador:** Validador metodológico e avaliador do trabalho acadêmico.
+- **Comunidade Acadêmica DevOps:** Futuros leitores do trabalho.
+- **Engenheiros DevOps (indireto):** Desenvolvedores, Engenheiros e Arquitetos interessados na utilização de IA para a geração de IaC.
 
 ### 5.2 Interesses e expectativas dos stakeholders
-Descreva o que cada grupo espera obter do experimento (insights, evidências, validação de decisão, mitigação de risco, etc.).
+- **Professor Orientador:** Evidências metodologicamente rigorosas (GQM), resultados reproduzíveis, contribuições originais à literatura DevOps.
+- **Autor:** Aprovação do trabalho, portfólio técnico com repositório público, publicações potenciais.
+- **Comunidade Acadêmica:** Dataset público (150 códigos + métricas), benchmarks comparativos de IAs mas geração de IaC.
+- **Engenheiros DevOps:** Recomendações práticas para seleção de IAs e otimização de prompts em workflows multi-cloud.
 
 ### 5.3 Impactos potenciais no processo / produto
-Antecipe como a execução do experimento pode afetar prazos, qualidade, carga de trabalho ou o próprio produto durante e após o estudo.
+**Durante execução:** Carga de trabalho concentrada, possível exaustão por coleta manual de prompts. Sem impacto no produto final, pois trata-se de um estudo isolado.
+**Após execução:** Repositório GitHub como asset permanente, dataset reutilizável para meta-análises, potencial para guidelines. Nenhum impacto negativo previsto em prazos/produtos existentes. Melhoria indireta na maturidade DevOps acadêmica e nas empresas via disseminação de boas práticas.
 
 ## 6. Riscos de alto nível, premissas e critérios de sucesso
 
 ### 6.1 Riscos de alto nível (negócio, técnicos, etc.)
-Identifique os principais riscos para negócio e tecnologia (atrasos, falhas de ambiente, indisponibilidade de dados, etc.) em nível macro.
+- **Técnico:** Instabilidade de APIs de IA interrompendo geração de códigos (probabilidade média, impacto alto).
+- **Metodológico:** Viés nos prompts afetando representatividade (probabilidade baixa, impacto médio).
+- **Recursos:** Esgotamento de créditos nas contas de Cloud ou limites de API pagos (probabilidade baixa, impacto alto).
+- **Acadêmico:** Falha em critérios GQM levando a reprovação na banca (probabilidade baixa, impacto crítico).
+- **Dados:** Perda de dataset por falha local de backup (probabilidade muito baixa, impacto médio).
 
 ### 6.2 Critérios de sucesso globais (go / no-go)
-Defina as condições sob as quais o experimento será considerado útil e viável, inclusive critérios que sustentem uma decisão de seguir ou não com mudanças.
+**Go (Sucesso):** ≥90% dos 150 códigos gerados válidos sintaticamente; variância explicada ≥70% nas comparações entre IAs; pelo menos 2 recomendações acionáveis validadas estatisticamente (p<0.05); relatório com ≥15 visualizações GQM claras.
+**No-go (Falha):** <70% códigos válidos ou nenhuma diferença estatística significativa entre IAs ou dataset incompleto (<120 códigos analisados).
 
 ### 6.3 Critérios de parada antecipada (pré-execução)
-Descreva situações em que o experimento deve ser adiado ou cancelado antes de começar (falta de recursos críticos, reprovação ética, mudanças de contexto).
+- Indisponibilidade de acesso pago às 3 IAs simultaneamente (Chat-GPT Plus, Gemini Pro, Claude Code).
+- Reprovação ética formal ou questões de direitos autorais nos códigos gerados.
+- Mudança radical no escopo do TCC por decisão da banca/orientador.
+- Falha crítica no setup técnico (TFLint/Checkov incompatíveis com providers multi-cloud).
+- Esgotamento total de orçamento.
 
 ## 7. Modelo conceitual e hipóteses
 
