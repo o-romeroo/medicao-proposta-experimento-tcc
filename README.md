@@ -14,10 +14,11 @@ EXP-DEVOPS-IAIAC-2025
 Versão: v1.0
 Histórico de revisão:
  - v1.0 (21/11/2025): Versão inicial, baseada no escopo de pesquisa definido para o trabalho e contendo todos os conteúdos necessários da primeira entrega.
+ - v1.1 (24/11/2025): Segunda versão, baseada no escopo de pesquisa definido para o trabalho e contendo todos os conteúdos necessários da segunda entrega.
 
 ### 1.4 Datas (criação, última atualização)
 Criação: 21/11/2025
-Última atualização: 21/11/2025
+Última atualização: 24/11/2025
 
 ### 1.5 Autores (nome, área, contato)
 João Vitor Romero Sales, Estudante de Engenharia de Software na Pontifícia Universidade Católica de Minas Gerais, Contato: joao.sales.785111@sga.pucminas.br
@@ -74,7 +75,7 @@ Q3.3: Há correlação entre clareza do prompt e redução de valores hard-coded
 
 **O4 - Recomendações Práticas:**
 Q4.1: Quais padrões de prompts otimizam a qualidade do código gerado pelas melhores ferramentas identificadas?
-Q4.2: Qual o impacto potencial da qualidade observada no tempo de revisão humana em pipelines DevOps?
+Q4.2: De que forma a qualidade do código afeta o tempo que os revisores humanos levam para realizar uma revisão do código IaC?
 Q4.3: Quais ferramentas complementares de linting são mais eficazes para mitigar falhas das IAs?
 
 ### 3.4 Métricas associadas (GQM)
