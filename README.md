@@ -201,28 +201,37 @@ De forma simplificada, o modelo conceitual é:
 ### 7.2 Hipóteses formais (H0, H1)
 **Para Q1 (Conformidade por ferramenta de IA)**
 
-H0\_Q1: As médias de conformidade com boas práticas de IaC são iguais entre as três ferramentas de IA, ou seja,
-$\mu_{\text{Conf\_ChatGPT}} = \mu_{\text{Conf\_Gemini}} = \mu_{\text{Conf\_Claude}}$.
+**H0_Q1:** As médias de conformidade com boas práticas de IaC são iguais entre as três ferramentas de IA, ou seja:  
+Média_Conf_ChatGPT = Média_Conf_Gemini = Média_Conf_Claude.
 
-H1\_Q1: Pelo menos uma das ferramentas de IA apresenta média de conformidade diferente, sendo esperado que Claude AI e Chat-GPT apresentem, em média, uma conformidade entre 5 e 10 pontos percentuais maior do que o Google Gemini ($\mu_{\text{Conf\_Claude}}, \mu_{\text{Conf\_ChatGPT}} \approx 75\%-85\%$ contra $\mu_{\text{Conf\_Gemini}} \approx 65\%-75\%$).
+**H1_Q1:** Pelo menos uma das ferramentas de IA apresenta média de conformidade diferente, sendo esperado que Claude AI e ChatGPT apresentem, em média, uma conformidade entre **75% e 85%**, enquanto o Google Gemini apresente entre **65% e 75%**.
+
+---
 
 **Para Q2 (Efeito da clareza do prompt)**
 
-H0\_Q2a: A média de vulnerabilidades detectadas não difere entre prompts de alta e baixa clareza, isto é,
-$\mu_{\text{Vuln\_Alta}} = \mu_{\text{Vuln\_Baixa}}$.
+**H0_Q2a:** A média de vulnerabilidades detectadas não difere entre prompts de alta e baixa clareza, isto é:  
+Média_Vuln_Alta = Média_Vuln_Baixa.
 
-H1\_Q2a: Prompts de alta clareza resultam em menos vulnerabilidades do que prompts de baixa clareza, com uma redução esperada de aproximadamente 1 a 2 vulnerabilidades por arquivo (por exemplo, $\mu_{\text{Vuln\_Alta}} \approx 1\text{–}2$ contra $\mu_{\text{Vuln\_Baixa}} \approx 3\text{–}4$ vulnerabilidades por código).
+**H1_Q2a:** Prompts de alta clareza resultam em menos vulnerabilidades do que prompts de baixa clareza, com redução esperada de aproximadamente **1 a 2 vulnerabilidades por arquivo** (por exemplo, Média_Vuln_Alta ≈ 1–2 contra Média_Vuln_Baixa ≈ 3–4).
 
-H0\_Q2b: A média de valores hard-coded não difere entre prompts de alta e baixa clareza, isto é,
-$\mu_{\text{HC\_Alta}} = \mu_{\text{HC\_Baixa}}$.
+---
 
-H1\_Q2b: Prompts de alta clareza resultam em menos valores hard-coded do que prompts de baixa clareza, com uma redução esperada de cerca de 30% a 40% (por exemplo, $\mu_{\text{HC\_Alta}} \approx 2\text{–}3$ valores por arquivo e $\mu_{\text{HC\_Baixa}} \approx 4\text{–}5$).
+**H0_Q2b:** A média de valores hard-coded não difere entre prompts de alta e baixa clareza, isto é:  
+Média_HC_Alta = Média_HC_Baixa.
+
+**H1_Q2b:** Prompts de alta clareza resultam em menos valores hard-coded do que prompts de baixa clareza, com redução esperada de **30% a 40%** (por exemplo, Média_HC_Alta ≈ 2–3 valores por arquivo e Média_HC_Baixa ≈ 4–5).
+
+---
 
 **Para Q3 (Interação IA × Cloud)**
 
-H0\_Q3: Não há interação significativa entre ferramenta de IA e provedor de cloud na taxa de valores hard-coded, ou seja, a diferença entre as ferramentas é semelhante em AWS e em Azure.
+**H0_Q3:** Não há interação significativa entre ferramenta de IA e provedor de cloud na taxa de valores hard-coded, ou seja, a diferença entre as ferramentas é semelhante em AWS e Azure.
 
-H1\_Q3: Existe interação entre ferramenta de IA e provedor de cloud na taxa de valores hard-coded. De forma mais específica, espera-se que Claude AI gere, em média, de 1 a 2 valores hard-coded a menos em Azure do que em AWS, enquanto Chat-GPT apresente pouca variação entre os provedores, e o Google Gemini mantenha uma taxa mais alta e estável em ambos (por exemplo, Claude: $\mu_{\text{HC\_Azure}} \approx 2$ vs. $\mu_{\text{HC\_AWS}} \approx 3\text{–}4$; Chat-GPT: $\mu_{\text{HC}} \approx 3$ em ambas as clouds; Gemini: $\mu_{\text{HC}} \approx 4\text{–}5$ em ambas).
+**H1_Q3:** Existe interação entre ferramenta de IA e provedor de cloud na taxa de valores hard-coded. Em particular:  
+- **Claude AI** tende a gerar cerca de **2 valores hard-coded em Azure** e **3–4 em AWS**.  
+- **ChatGPT** tende a gerar aproximadamente **3 valores hard-coded** em ambos os provedores.  
+- **Google Gemini** tende a manter uma taxa mais alta e estável, cerca de **4–5 valores** em ambas as clouds.
 
 ### 7.3 Nível de significância e considerações de poder
 Neste estudo será adotado o nível de significância α = 0,05, valor amplamente utilizado em pesquisas em engenharia de software, por oferecer um equilíbrio adequado entre risco de erro do tipo I (rejeitar a hipótese nula quando ela é verdadeira) e a necessidade de identificar efeitos relevantes. Considerando o tamanho de amostra planejado, com 50 prompts aplicados às três ferramentas de IA, resultando em 150 códigos de Terraform, espera-se obter um poder estatístico razoável para detectar efeitos de magnitude média nas comparações entre ferramentas e entre níveis de clareza de prompt. Embora o experimento não tenha o objetivo de ser um estudo estatístico de larga escala, o tamanho da amostra tende a oferecer evidências empíricas úteis sobre as hipóteses definidas, ainda que sua suficiência não tenha sido avaliada formalmente.
