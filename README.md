@@ -15,10 +15,11 @@ Versão: v1.0
 Histórico de revisão:
  - v1.0 (21/11/2025): Versão inicial, baseada no escopo de pesquisa definido para o trabalho e contendo todos os conteúdos necessários da primeira entrega.
  - v1.1 (24/11/2025): Segunda versão, baseada no escopo de pesquisa definido para o trabalho e contendo todos os conteúdos necessários da segunda entrega.
+ - v1.2 (27/11/2025): Terceira versão, baseada no escopo de pesquisa definido para o trabalho e contendo todos os conteúdos necessários da terceira entrega.
 
 ### 1.4 Datas (criação, última atualização)
 Criação: 21/11/2025
-Última atualização: 24/11/2025
+Última atualização: 27/11/2025
 
 ### 1.5 Autores (nome, área, contato)
 João Vitor Romero Sales, Estudante de Engenharia de Software na Pontifícia Universidade Católica de Minas Gerais, Contato: joao.sales.785111@sga.pucminas.br
@@ -188,50 +189,114 @@ A generalização externa é limitada pela amostra acadêmica (50 prompts contro
 ## 7. Modelo conceitual e hipóteses
 
 ### 7.1 Modelo conceitual do experimento
-Explique, em texto ou esquema, como você acredita que os fatores influenciam as respostas (por exemplo, "técnica A reduz defeitos em relação a B").
+O modelo conceitual deste experimento parte da ideia de que três fatores principais influenciam a qualidade do código Terraform gerado por IA: a ferramenta de IA utilizada (Chat-GPT, Google Gemini ou Claude AI), a clareza do prompt (alta ou baixa) e o provedor de cloud alvo (AWS ou Azure). Esses fatores afetam diretamente as respostas observadas, que neste estudo são medidas de qualidade como conformidade com boas práticas de IaC, quantidade de vulnerabilidades de segurança e quantidade de valores hard-coded presentes no código.
+
+Em termos conceituais, supõe-se que prompts mais claros tendem a produzir códigos mais alinhados a boas práticas, que ferramentas de IA podem apresentar desempenhos diferentes entre si e que o contexto da cloud alvo pode impactar a qualidade do código gerado, dado que a documentação, os recursos e a complexidade dos serviços variam entre AWS e Azure. Assim, o experimento busca observar como essas combinações de fatores resultam em diferentes níveis de qualidade de IaC.
+
+De forma simplificada, o modelo conceitual é:
+
+> Ferramenta de IA + Clareza do prompt + Cloud alvo
+> → influenciam → Qualidade do IaC (conformidade, segurança, manutenibilidade)
 
 ### 7.2 Hipóteses formais (H0, H1)
-Formule explicitamente as hipóteses nulas e alternativas para cada questão principal, incluindo a direção esperada do efeito quando fizer sentido.
+**Para Q1 (Conformidade por ferramenta de IA)**
+
+H0\_Q1: As médias de conformidade com boas práticas de IaC são iguais entre as três ferramentas de IA, ou seja,
+$\mu_{\text{Conf\_ChatGPT}} = \mu_{\text{Conf\_Gemini}} = \mu_{\text{Conf\_Claude}}$.
+
+H1\_Q1: Pelo menos uma das ferramentas de IA apresenta média de conformidade diferente, sendo esperado que Claude AI e Chat-GPT apresentem, em média, uma conformidade entre 5 e 10 pontos percentuais maior do que o Google Gemini ($\mu_{\text{Conf\_Claude}}, \mu_{\text{Conf\_ChatGPT}} \approx 75\%-85\%$ contra $\mu_{\text{Conf\_Gemini}} \approx 65\%-75\%$).
+
+**Para Q2 (Efeito da clareza do prompt)**
+
+H0\_Q2a: A média de vulnerabilidades detectadas não difere entre prompts de alta e baixa clareza, isto é,
+$\mu_{\text{Vuln\_Alta}} = \mu_{\text{Vuln\_Baixa}}$.
+
+H1\_Q2a: Prompts de alta clareza resultam em menos vulnerabilidades do que prompts de baixa clareza, com uma redução esperada de aproximadamente 1 a 2 vulnerabilidades por arquivo (por exemplo, $\mu_{\text{Vuln\_Alta}} \approx 1\text{–}2$ contra $\mu_{\text{Vuln\_Baixa}} \approx 3\text{–}4$ vulnerabilidades por código).
+
+H0\_Q2b: A média de valores hard-coded não difere entre prompts de alta e baixa clareza, isto é,
+$\mu_{\text{HC\_Alta}} = \mu_{\text{HC\_Baixa}}$.
+
+H1\_Q2b: Prompts de alta clareza resultam em menos valores hard-coded do que prompts de baixa clareza, com uma redução esperada de cerca de 30% a 40% (por exemplo, $\mu_{\text{HC\_Alta}} \approx 2\text{–}3$ valores por arquivo e $\mu_{\text{HC\_Baixa}} \approx 4\text{–}5$).
+
+**Para Q3 (Interação IA × Cloud)**
+
+H0\_Q3: Não há interação significativa entre ferramenta de IA e provedor de cloud na taxa de valores hard-coded, ou seja, a diferença entre as ferramentas é semelhante em AWS e em Azure.
+
+H1\_Q3: Existe interação entre ferramenta de IA e provedor de cloud na taxa de valores hard-coded. De forma mais específica, espera-se que Claude AI gere, em média, de 1 a 2 valores hard-coded a menos em Azure do que em AWS, enquanto Chat-GPT apresente pouca variação entre os provedores, e o Google Gemini mantenha uma taxa mais alta e estável em ambos (por exemplo, Claude: $\mu_{\text{HC\_Azure}} \approx 2$ vs. $\mu_{\text{HC\_AWS}} \approx 3\text{–}4$; Chat-GPT: $\mu_{\text{HC}} \approx 3$ em ambas as clouds; Gemini: $\mu_{\text{HC}} \approx 4\text{–}5$ em ambas).
 
 ### 7.3 Nível de significância e considerações de poder
-Defina o nível de significância (por exemplo, α = 0,05) e comente o que se espera em termos de poder estatístico, relacionando-o ao tamanho de amostra planejado.
+Neste estudo será adotado o nível de significância α = 0,05, valor amplamente utilizado em pesquisas em engenharia de software, por oferecer um equilíbrio adequado entre risco de erro do tipo I (rejeitar a hipótese nula quando ela é verdadeira) e a necessidade de identificar efeitos relevantes. Considerando o tamanho de amostra planejado, com 50 prompts aplicados às três ferramentas de IA, resultando em 150 códigos de Terraform, espera-se obter um poder estatístico razoável para detectar efeitos de magnitude média nas comparações entre ferramentas e entre níveis de clareza de prompt. Embora o experimento não tenha o objetivo de ser um estudo estatístico de larga escala, o tamanho da amostra tende a oferecer evidências empíricas úteis sobre as hipóteses definidas, ainda que sua suficiência não tenha sido avaliada formalmente.
 
 ## 8. Variáveis, fatores, tratamentos e objetos de estudo
 
 ### 8.1 Objetos de estudo
-Descreva o que será efetivamente manipulado ou analisado (módulos de código, requisitos, tarefas, casos de teste, issues, etc.).
+Os objetos de estudo consistem em 150 arquivos de código Terraform (.tf) gerados automaticamente, totalizando aproximadamente 5.000-10.000 linhas de HCL. Cada arquivo representa uma especificação de infraestrutura em nuvem, direcionada para AWS ou Azure, incluindo recursos como redes virtuais, máquinas virtuais, grupos de segurança e recursos de armazenamento. Esses arquivos são as unidades de análise sobre as quais serão aplicadas as ferramentas de validação e análise estática.
 
 ### 8.2 Sujeitos / participantes (visão geral)
-Caracterize em alto nível quem serão os participantes (desenvolvedores, testadores, estudantes, etc.), sem ainda entrar em detalhes de seleção.
+O estudo não envolve participantes humanos além do próprio pesquisador. Não há desenvolvedores ou usuários finais diretamente envolvidos na execução do experimento. O pesquisador atua como responsável pela elaboração dos prompts, pela interação com as ferramentas de IA, pela configuração das ferramentas de análise e pela interpretação dos resultados. As ferramentas de IA (Chat-GPT, Google Gemini e Claude AI) são tratadas como ferramentas automatizadas que produzem os artefatos a serem avaliados.
 
 ### 8.3 Variáveis independentes (fatores) e seus níveis
-Liste os fatores que serão manipulados (por exemplo, técnica, ferramenta, processo) e indique os níveis de cada um (A/B, X/Y, alto/baixo).
+Fator 1: Ferramenta de IA – 3 níveis: Chat-GPT, Google Gemini, Claude AI.
+Fator 2: Clareza do Prompt – 2 níveis: Alta (detalhada, com especificações de boas práticas), Baixa (genérica, ambígua).
+Fator 3: Provedor de Cloud – 2 níveis: AWS, Azure.
 
 ### 8.4 Tratamentos (condições experimentais)
-Descreva claramente cada condição de experimento (grupo controle, tratamento 1, tratamento 2, etc.) e o que distingue uma da outra.
+
+#### Tabela de Fatores, Tratamentos e Combinações
+| Fator 1: IA | Fator 2: Clareza | Fator 3: Cloud | Tratamento (Combinação) | n por Tratamento |
+| :-- | :-- | :-- | :-- | :-- |
+| Chat-GPT | Alta | AWS | T1 | 25 |
+| Chat-GPT | Alta | Azure | T2 | 25 |
+| Chat-GPT | Baixa | AWS | T3 | 25 |
+| Chat-GPT | Baixa | Azure | T4 | 25 |
+| Gemini | Alta | AWS | T5 | 25 |
+| Gemini | Alta | Azure | T6 | 25 |
+| Gemini | Baixa | AWS | T7 | 25 |
+| Gemini | Baixa | Azure | T8 | 25 |
+| Claude | Alta | AWS | T9 | 25 |
+| Claude | Alta | Azure | T10 | 25 |
+| Claude | Baixa | AWS | T11 | 25 |
+| Claude | Baixa | Azure | T12 | 25 |
+| **Total** |  |  | **12 tratamentos** | **300** |
+
+*Nota: Cada prompt é replicado nas 3 IAs, gerando 50 × 3 = 150 unidades; balanceamento completo.*
 
 ### 8.5 Variáveis dependentes (respostas)
-Informe as medidas de resultado que você observará (por exemplo, número de defeitos, esforço em horas, tempo de conclusão, satisfação).
+As variáveis dependentes são as medidas de resultado observadas para cada código gerado. As principais variáveis dependentes são: a conformidade com boas práticas de IaC, que será medida por meio da análise com TFLint e de um checklist de boas práticas; a quantidade de vulnerabilidades de segurança, identificadas por ferramentas como Checkov; a quantidade de valores hard-coded presentes no código, detectados por meio de scripts de análise; e a validação sintática do código, verificada com o comando “terraform validate”. Essas medidas representam a resposta do sistema à combinação de fatores aplicada.
 
 ### 8.6 Variáveis de controle / bloqueio
-Liste fatores que você não está estudando diretamente, mas que serão mantidos constantes ou usados para formar blocos (por exemplo, experiência, tipo de tarefa).
+Alguns fatores não serão estudados diretamente, mas precisam ser mantidos constantes para evitar influenciar os resultados. Entre eles estão as versões equivalentes das ferramentas de IA utilizadas (por exemplo, versões específicas dos modelos Chat-GPT, Gemini e Claude), a versão do Terraform, do TFLint e do Checkov, o ambiente de execução (mesmo computador e sistema operacional) e a estrutura básica dos prompts (seguindo um formato padrão). Esses aspectos serão tratados como variáveis de controle.
 
 ### 8.7 Possíveis variáveis de confusão conhecidas
-Identifique fatores que podem distorcer os resultados (como diferenças de contexto, motivação ou carga de trabalho) e que você pretende monitorar.
+Algumas variáveis de confusão são reconhecidas e podem influenciar os resultados, mesmo não sendo controladas totalmente. Entre elas estão as variações aleatórias das respostas das IAs, devido à natureza probabilística dos modelos; pequenas diferenças na interpretação de prompts semelhantes; e diferenças na maturidade e na documentação entre serviços de AWS e Azure que podem favorecer uma ou outra ferramenta em determinados cenários. Essas variáveis serão monitoradas na interpretação dos resultados, mas não serão objeto central do estudo.
+
+#### Tabela Completa de Variáveis
+
+| Categoria | Variável | Descrição |
+| :-- | :-- | :-- |
+| **Independente** | Ferramenta de IA | Modelo generativo utilizado (Chat-GPT, Gemini, Claude) |
+| **Independente** | Clareza do Prompt | Nível de detalhamento/especificidade do input (alta ou baixa clareza) |
+| **Independente** | Provedor de Cloud | Provedor de nuvem (AWS ou Azure) |
+| **Dependente** | Conformidade | Grau de aderência a boas práticas de IaC |
+| **Dependente** | Conformidade TFLint | Percentual de regras atendidas em análise estática |
+| **Dependente** | Vulnerabilidades Checkov | Quantidade total de issues de segurança detectados |
+| **Dependente** | Valores hard-coded | Quantidade de valores fixos não parametrizados |
+| **Controle** | Versão das ferramentas | Versão fixa de IA, Terraform, TFLint e Checkov |
+| **Confusão** | Variação da IA | Comportamento estocástico do modelo de IA |
 
 ## 9. Desenho experimental
 
 ### 9.1 Tipo de desenho (completamente randomizado, blocos, fatorial, etc.)
-Indique qual tipo de desenho será utilizado e justifique brevemente por que ele é adequado ao problema e às restrições.
+O experimento adotará um desenho fatorial completo 3×2×2 (12 tratamentos), no qual as combinações entre ferramenta de IA, clareza do prompt e cloud alvo serão exploradas de forma sistemática. Esse tipo de desenho é adequado porque permite analisar não apenas o efeito isolado de cada fator (por exemplo, qual IA é melhor em média), mas também possíveis interações entre eles (por exemplo, se uma determinada IA funciona melhor com prompts mais claros ou em um provedor de cloud específico). Além disso, o desenho fatorial é compatível com o número de códigos que será gerado e analisado.
 
 ### 9.2 Randomização e alocação
-Explique o que será randomizado (sujeitos, tarefas, ordem de tratamentos) e como a randomização será feita na prática (ferramentas, procedimentos).
+Para reduzir viés de ordem e efeitos não controlados, a ordem de execução dos prompts será randomizada. Isso significa que a sequência em que os prompts serão enviados para as ferramentas de IA será definida de forma aleatória, usando, por exemplo, um script simples em Python. Para cada prompt, a ordem em que as três IAs serão chamadas também poderá ser sorteada, de forma a evitar que sempre a mesma ferramenta seja executada primeiro. Essa estratégia de randomização ajuda a distribuir eventuais instabilidades das APIs ao longo do experimento.
 
 ### 9.3 Balanceamento e contrabalanço
-Descreva como você garantirá que os grupos fiquem comparáveis (balanceamento) e como lidará com efeitos de ordem ou aprendizagem (contrabalanço).
+O experimento buscará manter o balanceamento entre as condições experimentais, garantindo que todas as três IAs recebam o mesmo conjunto de prompts, com a mesma proporção de prompts de alta e baixa clareza, e distribuídos entre AWS e Azure. Isso significa que cada ferramenta será avaliada nas mesmas situações, o que torna a comparação mais justa. O contrabalanço será feito variando a ordem das IAs por prompt, de forma que, ao longo do experimento, nenhuma IA seja sistematicamente favorecida por ser sempre a primeira ou a última a ser executada.
 
 ### 9.4 Número de grupos e sessões
-Informe quantos grupos existirão e quantas sessões ou rodadas cada sujeito ou grupo irá executar, com uma breve justificativa.
+O desenho considera, conceitualmente, até doze grupos experimentais, formados pelas combinações entre três ferramentas de IA, dois níveis de clareza de prompt e dois provedores de cloud. Na prática, o experimento será conduzido em uma única “sessão” principal de execução, dividida em etapas: preparação dos prompts, geração dos códigos, execução das ferramentas de análise e consolidação dos resultados. A repetição de prompts ao longo das diferentes ferramentas de IA garante um número adequado de observações por combinação de fatores, sem necessidade de múltiplas sessões com participantes humanos.
 
 ## 10. População, sujeitos e amostragem
 
