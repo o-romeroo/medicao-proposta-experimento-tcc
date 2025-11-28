@@ -432,19 +432,39 @@ O estudo é predominantemente quantitativo. Caso sejam coletados dados qualitati
 ## 13. Avaliação de validade (ameaças e mitigação)
 
 ### 13.1 Validade de conclusão
-Liste ameaças que podem comprometer a robustez das conclusões estatísticas (baixo poder, violação de suposições, erros de medida) e como pretende mitigá-las.
+Neste trabalho, algumas ameaças de conclusão, que estão ligadas à qualidade das inferências estatísticas feitas a partir dos dados são: tamanho de amostra limitado para alguns grupos, escolha inadequada de testes estatísticos, violação de suposições (como normalidade e homogeneidade de variâncias) e erros de medida nas métricas de qualidade do código.
+
+Para mitigar essas ameaças, o planejamento prevê: usar um número razoável de códigos por combinação de fatores (para aumentar o poder do teste), aplicar testes adequados ao desenho experimental (ANOVA quando as suposições forem atendidas e testes não paramétricos quando não forem), verificar previamente as suposições por meio de análise exploratória (histogramas, boxplots, testes simples de normalidade) e padronizar a coleta das métricas via scripts e ferramentas automatizadas, reduzindo a chance de erro manual.
 
 ### 13.2 Validade interna
-Identifique ameaças relacionadas a causas alternativas para os efeitos observados (history, maturation, selection, etc.) e explique suas estratégias de controle.
+No contexto deste experimento, algumas ameaças de validade interna, que estão relacionadas à existência de explicações alternativas para os efeitos observados são: variações de configuração das ferramentas de IA ao longo do tempo, problemas de ambiente (por exemplo, mudanças na versão do Terraform ou de plugins), diferença de tratamento entre grupos (por exemplo, executar uma IA sempre em um horário e outra em outro) e erros na execução dos scripts.
+
+Para reduzir essas ameaças, serão adotadas algumas estratégias: fixar versões das ferramentas sempre que possível (Terraform, TFLint, Checkov, bibliotecas usadas), registrar as versões dos modelos de IA e a data de execução, automatizar a execução com scripts que tratem todas as combinações de forma padronizada, randomizar a ordem de geração dos códigos e de execução das análises e registrar logs de cada etapa para facilitar a rastreabilidade. Com isso, busca-se garantir que a única diferença sistemática entre grupos seja a combinação de fatores do experimento (ferramenta de IA, clareza do prompt, provedor de cloud).
 
 ### 13.3 Validade de constructo
-Reflita se as medidas escolhidas realmente representam os conceitos de interesse e descreva como você reduzirá ambiguidades de interpretação.
+Neste trabalho, as principais ameaças de validade do constructo, que procura compreender se o que está sendo medido de fato representa os conceitos teóricos de interesse são: “qualidade do IaC”, “conformidade com boas práticas” e “segurança do código”. Existe o risco de usar métricas que não capturem bem esses conceitos, ou de interpretá-las de forma ambígua.
+
+Para mitigar isso, as métricas foram escolhidas com base na literatura e em práticas da área: conformidade medida por regras de ferramentas como TFLint, segurança medida por vulnerabilidades apontadas pelo Checkov e manutenibilidade aproximada pela presença de valores hard-coded. Além disso, os instrumentos (configs de TFLint, políticas do Checkov e scripts de contagem) serão descritos claramente, permitindo que o leitor entenda o que cada métrica captura. Na discussão dos resultados, será sempre feita a ponte explícita entre métrica e conceito (por exemplo, explicar por que menos hard-coded sugere melhor manutenibilidade), evitando extrapolações além do que as medidas suportam.
 
 ### 13.4 Validade externa
-Discuta em que contextos os resultados podem ser generalizados e quais diferenças de cenário podem limitar essa generalização.
+Neste estudo, algumas limitações que ameaçam a sua validade externa, que diz respeito a em que medida os resultados podem ser generalizados para outros contextos são: uso de um conjunto específico de prompts, foco em apenas duas clouds (AWS e Azure), uso de três ferramentas de IA em versões específicas e execução em um contexto acadêmico, sem pressão real de produção.
+
+Os resultados podem ser generalizados com mais segurança para cenários semelhantes: equipes DevOps que usam Terraform para cenários parecidos com os prompts usados (por exemplo, redes, máquinas virtuais e serviços básicos em AWS/Azure) e que recorrem às mesmas ferramentas de IA ou a versões próximas. A generalização para outras nuvens, outros tipos de infraestrutura (por exemplo, arquiteturas muito complexas) ou para versões futuras de modelos de IA deve ser feita com cautela e sempre indicada como hipótese a ser testada em trabalhos futuros.
 
 ### 13.5 Resumo das principais ameaças e estratégias de mitigação
-Faça uma síntese das ameaças mais críticas e das ações planejadas, de preferência em forma de lista ou tabela simples.
+
+| Tipo de validade | Ameaça principal | Estratégia de mitigação |
+| :-- | :-- | :-- |
+| Conclusão | Baixo poder e violação de suposições | Amostra razoável por grupo, verificação de suposições, uso de testes adequados |
+| Conclusão | Erros de medida nas métricas | Coleta automatizada com scripts e ferramentas estáveis |
+| Interna | Variação de ambiente e versões | Fixar versões, registrar configurações e datas, automatizar execução |
+| Interna | Diferença de tratamento entre combinações | Randomização da ordem de geração e análise, uso de scripts padronizados |
+| Constructo | Métricas não representarem bem “qualidade de IaC” | Escolha de métricas baseadas em literatura e práticas, descrição clara dos instrumentos |
+| Constructo | Interpretação ambígua das métricas | Discutir explicitamente a relação métrica–conceito na análise |
+| Externa | Cenário restrito (prompts, clouds, versões de IA) | Descrever claramente o contexto, limitar a generalização a cenários semelhantes |
+| Externa | Diferenças entre ambiente acadêmico e industrial | Reconhecer essa limitação e sugerir replicações em ambientes reais |
+
+Esse conjunto de medidas não elimina todas as ameaças, mas torna algumas delas explícitas e suficientemente controladas para que o trabalho apresente um grau significativo de sucesso em termos conceituais.
 
 ## 14. Ética, privacidade e conformidade
 
