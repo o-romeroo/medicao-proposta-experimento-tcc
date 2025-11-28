@@ -310,36 +310,94 @@ O desenho considera, conceitualmente, até doze grupos experimentais, formados p
 ## 10. População, sujeitos e amostragem
 
 ### 10.1 População-alvo
-Descreva qual é a população real que você deseja representar com o experimento (por exemplo, "desenvolvedores Java de times de produto web").
+A população-alvo deste estudo são engenheiros DevOps e de software que utilizam ou pretendem utilizar ferramentas de inteligência artificial para gerar código de infraestrutura como código (IaC) com Terraform em ambientes multi-cloud (AWS e Azure). Em termos práticos, o experimento busca representar o contexto de times que desejam automatizar a criação de infraestrutura, mas se preocupam com qualidade, segurança e manutenção do IaC gerado.
 
 ### 10.2 Critérios de inclusão de sujeitos
-Especifique os requisitos mínimos para um participante ser elegível (experiência, conhecimento, papel, disponibilidade, etc.).
+Como o experimento é automatizado e focado em código gerado por IA, não haverá sujeitos humanos participando diretamente da coleta principal. Ainda assim, considera-se como “sujeitos de referência” perfis de engenheiros de software ou DevOps com conhecimento intermediário em Terraform, AWS ou Azure e familiaridade básica com ferramentas de IA generativa. Esses perfis serão usados como base conceitual para definir os prompts de entrada e os cenários de infraestrutura que serão simulados.
 
 ### 10.3 Critérios de exclusão de sujeitos
-Liste condições que impedem participação (conflitos de interesse, falta de skills essenciais, restrições legais ou éticas).
+Não há participantes humanos formais, mas restringe-se a definição dos prompts exclusivamente a engenheiros de software com experiência em infraestrutura em cloud e a engenheiros DevOps. Dessa forma, excluem-se indivíduos que não possuam esse nível de conhecimento especializado, evitando a criação de cenários irreais ou tecnicamente incorretos.
 
 ### 10.4 Tamanho da amostra planejado (por grupo)
 Defina quantos participantes você pretende ter no total e em cada grupo, relacionando a decisão com poder, recursos e contexto.
+A “amostra” do experimento é formada pelos arquivos de código Terraform gerados. Serão utilizados 50 prompts distintos, aplicados às três ferramentas de IA (Chat-GPT, Google Gemini e Claude AI), totalizando 150 códigos. Cada combinação de fatores (por exemplo, IA específica + cloud específica + clareza do prompt) terá várias instâncias de código gerado, o que permite comparar médias de métricas de qualidade entre grupos. Esse tamanho foi escolhido para ser viável em um trabalho deste escopo, mas significativo o suficiente para permitir análises estatísticas básicas com nível de significância de 5%.
 
 ### 10.5 Método de seleção / recrutamento
-Explique como os participantes serão escolhidos (amostra de conveniência, sorteio, convite aberto, turma de disciplina, time específico).
+Uma vez que não há recrutamento de pessoas, o “recrutamento” será a seleção dos prompts. Os prompts serão definidos a partir de documentação oficial de AWS, Azure e Terraform, e de exemplos comuns de cenários DevOps (por exemplo, criação de redes, máquinas virtuais, bancos de dados). A seleção será feita por conveniência, pelo próprio pesquisador, buscando cobrir casos típicos (infraestrutura simples, intermediária e um pouco mais complexa).
 
 ### 10.6 Treinamento e preparação dos sujeitos
-Descreva qual treinamento ou material preparatório será fornecido para nivelar entendimento e reduzir vieses por falta de conhecimento.
+Não há treinamento formal de participantes humanos. A preparação ocorre no nível do pesquisador, que estudará previamente Terraform, TFLint, Checkov, e infraestrutura nas clouds públicas AWS e Azure, além de revisar materiais sobre planejamento de experimentos. Também serão preparados templates de prompts padronizados, para reduzir variação de linguagem e garantir que a comparação entre ferramentas de IA seja justa.
 
 ## 11. Instrumentação e protocolo operacional
 
 ### 11.1 Instrumentos de coleta (questionários, logs, planilhas, etc.)
-Liste todos os instrumentos que serão usados para coletar dados (arquivos, formulários, scripts, ferramentas), com uma breve descrição do papel de cada um.
+Os principais instrumentos de coleta de dados serão:
+- Arquivos de código Terraform gerados pelas IAs, que são o objeto central de análise.
+- Scripts em Python para automatizar a execução de terraform validate, TFLint e Checkov, e para extrair métricas (por exemplo, contagem de hard-coded values).
+- Planilhas Excel para registrar as métricas extraídas (conformidade, vulnerabilidades, hard-coded, etc.) por combinação de prompt, IA e cloud.
+- Logs de execução das ferramentas (saídas de TFLint, Checkov e Terraform) para rastreabilidade e conferência de resultados.
 
 ### 11.2 Materiais de suporte (instruções, guias)
-Descreva as instruções escritas, guias rápidos, slides ou outros materiais que serão fornecidos a participantes e administradores do experimento.
+Serão produzidos alguns materiais de apoio simples:
+- Um documento com a lista de prompts e regras de formatação, indicando quais são de alta clareza e quais são de baixa clareza.
+- Um pequeno guia de execução do experimento, descrevendo como rodar os scripts, configurar credenciais e executar as ferramentas (Terraform, TFLint, Checkov).
+- Um arquivo README no repositório com a descrição dos diretórios (por exemplo, pasta para códigos da AWS, pasta para Azure, pasta de scripts, pasta de resultados).
+
+Esses materiais ajudam a manter o experimento reproduzível, caso algum outro pesquisador queira replicar ou estender o trabalho.
 
 ### 11.3 Procedimento experimental (protocolo – visão passo a passo)
-Escreva, em ordem, o que acontecerá na operação (do convite ao encerramento), de modo que alguém consiga executar o experimento seguindo esse roteiro.
+O procedimento experimental seguirá uma sequência clara, desde o planejamento até a análise dos dados. Abaixo está um fluxograma textual e, em seguida, a descrição dos passos.
+
+Fluxograma (visão geral):
+INÍCIO
+  ↓
+Definição dos Prompts e Cenários
+  ↓
+Configuração das Ferramentas (Terraform, TFLint, Checkov, Scripts)
+  ↓
+Geração de Código IaC (Chat-GPT, Gemini, Claude)
+  ↓
+Organização e Armazenamento dos Arquivos (.tf)
+  ↓
+Execução de terraform validate, TFLint e Checkov
+  ↓
+Extração das Métricas (scripts e planilhas)
+  ↓
+Consolidação dos Dados (dataset único)
+  ↓
+Análise Estatística e Interpretação dos Resultados
+  ↓
+Elaboração do Relatório e Discussão com Stakeholders (orientador)
+  ↓
+FIM
+
+Passo a passo em texto:
+
+1. Definir os 50 prompts, separando claramente quais são de alta e quais são de baixa clareza, e dividindo entre cenários AWS e Azure.
+2. Configurar o ambiente local: instalar Terraform, TFLint, Checkov, Python e bibliotecas necessárias, além de criar arquivos de configuração (por exemplo, .tflint.hcl).
+3. Criar scripts em Python ou shell para automatizar a chamada das ferramentas, a leitura dos arquivos .tf e o cálculo das métricas.
+4. Para cada prompt, executá-lo via API nas três ferramentas de IA (Chat-GPT, Gemini e Claude) e salvar as respostas em arquivos .tf organizados em pastas por IA e por cloud.
+5. Executar terraform validate para cada arquivo, registrando se o código é sintaticamente válido.
+6. Executar TFLint com os plugins para AWS e Azure, coletando informações de conformidade com boas práticas.
+7. Executar Checkov para identificar vulnerabilidades de segurança em cada arquivo.
+8. Executar os scripts de análise para contar valores hard-coded, consolidar as métricas e gerar uma planilha com todas as informações.
+9. Revisar a planilha para verificar se não há erros visíveis ou dados faltantes.
+10. Importar os dados para uma ferramenta de análise (por exemplo, Python com pandas) para produzir tabelas, gráficos e estatísticas descritivas.
+11. Executar os testes estatísticos planejados (por exemplo, ANOVA, testes de diferença de médias), interpretar os resultados em relação às hipóteses e registrar as conclusões.
+12. Escrever a seção de resultados e discussão do trabalho, incluindo implicações para equipes DevOps e recomendações de uso das IAs.
 
 ### 11.4 Plano de piloto (se haverá piloto, escopo e critérios de ajuste)
-Indique se um piloto será realizado, com que participantes e objetivos, e defina que tipo de ajuste do protocolo poderá ser feito com base nesse piloto.
+Antes de rodar o experimento completo, será feito um piloto com um subconjunto de dados:
+- Serão escolhidos 5 prompts (em vez de 50), cobrindo pelo menos um caso de alta e um de baixa clareza, tanto para AWS quanto para Azure.
+- Esses prompts serão enviados para as três IAs, gerando 15 arquivos .tf.
+- O pipeline completo será executado (validate, TFLint, Checkov, scripts, planilha) para esses 15 arquivos.
+
+O objetivo do piloto é verificar:
+- Se os scripts e ferramentas estão funcionando corretamente.
+- Se as métricas podem ser coletadas sem grandes problemas.
+- Se o tempo de execução é viável para escalar de 15 para 150 arquivos.
+
+Caso o piloto identifique problemas (por exemplo, falha na leitura de arquivos, erro de configuração, métricas pouco úteis), o protocolo será ajustado antes da execução completa. Ajustes podem incluir mudar alguma métrica, refinar prompts ou corrigir scripts.
 
 ## 12. Plano de análise de dados (pré-execução)
 
