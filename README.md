@@ -349,6 +349,7 @@ Esses materiais ajudam a manter o experimento reproduzível, caso algum outro pe
 O procedimento experimental seguirá uma sequência clara, desde o planejamento até a análise dos dados. Abaixo está um fluxograma textual e, em seguida, a descrição dos passos.
 
 Fluxograma (visão geral):
+```
 INÍCIO
   ↓
 Definição dos Prompts e Cenários
@@ -370,6 +371,7 @@ Análise Estatística e Interpretação dos Resultados
 Elaboração do Relatório e Discussão com Stakeholders (orientador)
   ↓
 FIM
+```
 
 Passo a passo em texto:
 
