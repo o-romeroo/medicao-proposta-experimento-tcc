@@ -16,10 +16,11 @@ Histórico de revisão:
  - v1.0 (21/11/2025): Versão inicial, baseada no escopo de pesquisa definido para o trabalho e contendo todos os conteúdos necessários da primeira entrega.
  - v1.1 (24/11/2025): Segunda versão, baseada no escopo de pesquisa definido para o trabalho e contendo todos os conteúdos necessários da segunda entrega.
  - v1.2 (27/11/2025): Terceira versão, baseada no escopo de pesquisa definido para o trabalho e contendo todos os conteúdos necessários da terceira entrega.
+ - v1.3 (28/11/2025): Quarta versão, baseada no escopo de pesquisa definido para o trabalho e contendo todos os conteúdos necessários da quarta entrega.
 
 ### 1.4 Datas (criação, última atualização)
 Criação: 21/11/2025
-Última atualização: 27/11/2025
+Última atualização: 28/11/2025
 
 ### 1.5 Autores (nome, área, contato)
 João Vitor Romero Sales, Estudante de Engenharia de Software na Pontifícia Universidade Católica de Minas Gerais, Contato: joao.sales.785111@sga.pucminas.br
