@@ -379,7 +379,7 @@ Passo a passo em texto:
 2. Configurar o ambiente local: instalar Terraform, TFLint, Checkov, Python e bibliotecas necessárias, além de criar arquivos de configuração (por exemplo, .tflint.hcl).
 3. Criar scripts em Python ou shell para automatizar a chamada das ferramentas, a leitura dos arquivos .tf e o cálculo das métricas.
 4. Para cada prompt, executá-lo via API nas três ferramentas de IA (Chat-GPT, Gemini e Claude) e salvar as respostas em arquivos .tf organizados em pastas por IA e por cloud.
-5. Executar terraform validate para cada arquivo, registrando se o código é sintaticamente válido.
+5. Executar o comando `terraform validate` para cada arquivo, registrando se o código é sintaticamente válido.
 6. Executar TFLint com os plugins para AWS e Azure, coletando informações de conformidade com boas práticas.
 7. Executar Checkov para identificar vulnerabilidades de segurança em cada arquivo.
 8. Executar os scripts de análise para contar valores hard-coded, consolidar as métricas e gerar uma planilha com todas as informações.
@@ -404,16 +404,29 @@ Caso o piloto identifique problemas (por exemplo, falha na leitura de arquivos, 
 ## 12. Plano de análise de dados (pré-execução)
 
 ### 12.1 Estratégia geral de análise (como responderá às questões)
-Explique, em alto nível, como os dados coletados serão usados para responder cada questão de pesquisa ou de negócio.
+A estratégia geral será usar as métricas coletadas para responder às questões de pesquisa definidas anteriormente (Q1, Q2, Q3). Em resumo:
+- Para Q1 (qual IA gera código com maior conformidade), será feita comparação das métricas de conformidade entre Chat-GPT, Gemini e Claude.
+- Para Q2 (efeito da clareza do prompt em vulnerabilidades e hard-coded), serão comparadas as médias dessas métricas entre o grupo de prompts de alta clareza e o grupo de baixa clareza.
+- Para Q3 (implicações práticas em contexto multi-cloud), serão analisadas as diferenças de resultados entre AWS e Azure, bem como possíveis interações entre IA e cloud.
+
+A partir dessas análises, serão formuladas conclusões de qual IA parece mais adequada para determinado contexto e a relação da melhoria da qualidade do código por conta de prompts mais claros.
 
 ### 12.2 Métodos estatísticos planejados
-Liste os principais testes ou técnicas estatísticas que pretende usar (por exemplo, t-teste, ANOVA, testes não paramétricos, regressão).
+Os principais métodos estatísticos previstos são:
+- Estatísticas descritivas (média, mediana, desvio padrão) para todas as métricas, por grupo (IA, clareza, cloud).
+- Testes de diferença de médias, como ANOVA de uma ou mais vias, para comparar as ferramentas de IA em termos de conformidade e outras métricas.
+- Se necessário, testes t de student para comparar dois grupos específicos (por exemplo, alta vs baixa clareza).
+- Caso as suposições de normalidade não sejam atendidas, podem ser usados testes não paramétricos simples (como Mann-Whitney) para comparar dois grupos.
+- Análise gráfica (boxplots, gráficos de barras) para visualizar as diferenças entre grupos.
 
 ### 12.3 Tratamento de dados faltantes e outliers
-Defina previamente as regras para lidar com dados ausentes e valores extremos, evitando decisões oportunistas após ver os resultados.
+O tratamento de dados será definido antes da análise para evitar viés das seguintes formas:
+- Se algum arquivo não puder ser analisado (por exemplo, devido a um erro grave no código que impeça a execução do comando terraform validate), ele será marcado como falha e registrado. Esses casos poderão ser excluídos de análises específicas, desde que a proporção de faltantes por métrica não exceda 10% do total (n=150).
+  Caso a proporção ultrapasse 10% em algum grupo, esse grupo será analisado com exclusão de casos incompletos, registrando-se a redução no tamanho da amostra. Além disso, será realizado um teste de sensibilidade comparando resultados com e sem imputação, garantindo que as conclusões sejam baseadas em evidências estatisticamente sólidas e não em remoções  arbitrárias.
+- Valores extremos (outliers), como um código com número de vulnerabilidades muito acima dos demais, serão inspecionados manualmente. Se forem considerados erros de execução ou de coleta, poderão ser removidos com registro explícito. Se forem casos reais, serão mantidos e incluídos em testes de robustez (por exemplo, ANOVA com e sem o outlier) para avaliação de sensibilidade, e serão discutidos na seção de resultados.
 
 ### 12.4 Plano de análise para dados qualitativos (se houver)
-Descreva como você tratará dados qualitativos (entrevistas, comentários, observações), especificando a técnica de análise (codificação, categorias, etc.).
+O estudo é predominantemente quantitativo. Caso sejam coletados dados qualitativos, como anotações do pesquisador e executor do trabalho sobre problemas recorrentes nos códigos ou padrões percebidos nas respostas das IAs, esses dados serão analisados de forma simples, por meio de leitura e categorização manual. Essas categorias serão então usadas para enriquecer a interpretação dos resultados numéricos, mas não haverá análise qualitativa complexa, como entrevistas ou análise de conteúdo formal.
 
 ## 13. Avaliação de validade (ameaças e mitigação)
 
