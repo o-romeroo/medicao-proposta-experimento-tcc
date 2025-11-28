@@ -469,16 +469,16 @@ Esse conjunto de medidas não elimina todas as ameaças, mas torna algumas delas
 ## 14. Ética, privacidade e conformidade
 
 ### 14.1 Questões éticas (uso de sujeitos, incentivos, etc.)
-Descreva potenciais questões éticas (pressão para participar, uso de estudantes, incentivos, riscos de exposição) e como serão tratadas.
+Este experimento não envolve coleta de dados pessoais nem participação ativa de sujeitos humanos em tarefas experimentais, pois todo o foco está nos códigos gerados por ferramentas de IA e na análise automatizada desses artefatos. Ainda assim, há cuidados éticos básicos a considerar, como transparência com o orientador e com a instituição sobre o uso de ferramentas de IA, respeito à propriedade intelectual das ferramentas e da documentação utilizada como referência e ausência de qualquer tipo de pressão sobre colegas para participação formal. Caso algum colega contribua com sugestões de prompts ou revisão de código, essa colaboração será voluntária, sem incentivos financeiros e devidamente mencionada nos agradecimentos do trabalho.
 
 ### 14.2 Consentimento informado
-Explique como os participantes serão informados sobre objetivos, riscos, benefícios e como registrarão seu consentimento.
+Como não há sujeitos humanos formalmente envolvidos, não será aplicado um processo de consentimento informado tradicional, com um termo assinado. O contato com o professor orientador servirá para informar claramente os objetivos do estudo, o tipo de dados manipulados (apenas artefatos de código e resultados de ferramentas) e a ausência de riscos para pessoas. 
 
 ### 14.3 Privacidade e proteção de dados
-Indique que dados pessoais serão coletados, como serão protegidos (anonimização, pseudoanonimização, controle de acesso) e por quanto tempo serão mantidos.
+Neste trabalho não está prevista a coleta de dados pessoais sensíveis, uma vez que os principais dados serão arquivos de código Terraform gerados pelas IAs, saídas de ferramentas (TFLint, Checkov, terraform validate) e planilhas com métricas agregadas. Os arquivos e planilhas serão armazenados em repositórios privados (GitHub privado ou armazenamento local com backup) protegidos por senha. Caso algum dado de conta (como tokens de API das IAs ou credenciais de cloud) precise ser configurado, essas informações ficarão em arquivos separados (variáveis de ambiente ou arquivos .env ignorados pelo controle de versão) e nunca serão incluídas no resultado final do trabalho ou em repositórios públicos.
 
 ### 14.4 Aprovações necessárias (comitê de ética, jurídico, DPO, etc.)
-Liste órgãos ou pessoas que precisam aprovar o experimento (comitê de ética, jurídico, DPO, gestores) e o status atual dessas aprovações.
+Como o estudo não envolve intervenção com seres humanos nem tratamento de dados pessoais, a princípio não se enquadra na obrigatoriedade de submissão a comitê de ética em pesquisa com seres humanos. Ainda assim, o plano será discutido com o professor orientador, que poderá confirmar se é necessário algum tipo de parecer formal da coordenação do curso ou da instituição. Não há envolvimento direto com dados de produção de empresas, portanto, não se espera necessidade de aprovação jurídica ou de um DPO (Data Protection Officer). Caso, em algum momento, sejam utilizadas contas institucionais de cloud ou de IA, o uso seguirá as políticas da universidade e da plataforma de nuvem para este tipo de conta.
 
 ## 15. Recursos, infraestrutura e orçamento
 
