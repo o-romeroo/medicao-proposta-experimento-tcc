@@ -364,11 +364,11 @@ Execução de terraform validate, TFLint e Checkov
   ↓
 Extração das Métricas (scripts e planilhas)
   ↓
-Consolidação dos Dados (dataset único)
+Consolidação dos Dados (dataset unificado)
   ↓
 Análise Estatística e Interpretação dos Resultados
   ↓
-Elaboração do Relatório e Discussão com Stakeholders (orientador)
+Elaboração do Relatório e Discussão com Stakeholders (professor orientador)
   ↓
 FIM
 ```
