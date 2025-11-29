@@ -17,10 +17,11 @@ Histórico de revisão:
  - v1.1 (24/11/2025): Segunda versão, baseada no escopo de pesquisa definido para o trabalho e contendo todos os conteúdos necessários da segunda entrega.
  - v1.2 (27/11/2025): Terceira versão, baseada no escopo de pesquisa definido para o trabalho e contendo todos os conteúdos necessários da terceira entrega.
  - v1.3 (28/11/2025): Quarta versão, baseada no escopo de pesquisa definido para o trabalho e contendo todos os conteúdos necessários da quarta entrega.
+ - v1.4 (29/11/2025): Quinta versão e versão final, baseada nos tópicos e conteúdos restantes, necessários para finalizar o trabalho e a última entrega.
 
 ### 1.4 Datas (criação, última atualização)
 Criação: 21/11/2025
-Última atualização: 28/11/2025
+Última atualização: 29/11/2025
 
 ### 1.5 Autores (nome, área, contato)
 João Vitor Romero Sales, Estudante de Engenharia de Software na Pontifícia Universidade Católica de Minas Gerais, Contato: joao.sales.785111@sga.pucminas.br
@@ -483,65 +484,110 @@ Como o estudo não envolve intervenção com seres humanos nem tratamento de dad
 ## 15. Recursos, infraestrutura e orçamento
 
 ### 15.1 Recursos humanos e papéis
-Identifique os membros da equipe do experimento e descreva brevemente o papel e responsabilidade de cada um.
+A equipe do experimento é formada por:
+
+- Pesquisador principal (aluno de graduação em Engenharia de Software): responsável por planejar o experimento, preparar os prompts, configurar ferramentas, executar as coletas, analisar os dados e escrever o documento final do trabalho.
+- Professor orientador: responsável por revisar o plano experimental, orientar decisões metodológicas, acompanhar a análise de resultados e avaliar a versão final do trabalho.
+- Eventuais colaboradores informais (colegas pesquisadores com conhecimento em infraestrutura em cloud): podem ajudar na criação e revisão de prompts, e testes de scripts, sem papel formal de decisão.
 
 ### 15.2 Infraestrutura técnica necessária
-Liste ambientes, servidores, ferramentas, repositórios e integrações que devem estar disponíveis para executar o experimento.
+Para executar o experimento, serão necessários:
+
+- Um computador pessoal com boa capacidade computacional (CPU e memória suficientes para rodar Terraform, ferramentas de análise e scripts).
+- Acesso à internet estável para utilização das ferramentas de IA (Chat-GPT, Gemini e Claude) e para download de dependências.
+- Instalação de Terraform CLI, TFLint, Checkov, Python (com bibliotecas para manipulação de arquivos e análise de dados) e planilhas Excel.
+- Um repositório de código GitHub para armazenar scripts, configurações e resultados, em modo privado.
+- Eventual uso de uma conta de cloud (AWS e Azure) apenas para referência de documentação e, se necessário, validações simples, sem criação de recursos que gerem custo significativo.
 
 ### 15.3 Materiais e insumos
-Relacione materiais físicos ou digitais necessários (máquinas, licenças, formulários, dispositivos) que precisam estar prontos antes da operação.
+Os principais materiais e insumos são:
+
+- Licenças ou acessos às ferramentas de IA (que podem ser versões gratuitas ou planos estudantis, dependendo da política de cada plataforma ou ferramenta).
+- Ferramentas de desenvolvimento VisualStudio Code para a criação e edição de scripts e arquivos Terraform.
+- Documentação oficial de Terraform, AWS e Azure, acessível gratuitamente nos sites das plataformas.
+- Formulários ou documentos digitais (por exemplo, modelos de planilhas ou templates de TCC) fornecidos pela instituição de ensino.
+- Uma conta de e-mail institucional para comunicação com o professor orientador e, caso necessário, com a coordenação.
 
 ### 15.4 Orçamento e custos estimados
-Faça uma estimativa dos principais custos envolvidos (horas de pessoas, serviços, licenças, infraestrutura) e a fonte de financiamento.
+Os principais custos estimados são:
+
+- Horas de trabalho do pesquisador, que não geram custo financeiro direto, mas representam esforço ao longo do semestre.
+- Eventuais custos de uso das ferramentas de IA, caso seja necessário adquirir créditos adicionais além dos limites gratuitos.
+- Possíveis custos de uso de cloud (AWS/Azure), que serão mantidos mínimos, evitando a criação de recursos pagos em larga escala (o foco é na geração de código, não na implantação real da infraestrutura).
+
+A fonte de “financiamento” é o próprio aluno pesquisador, eventualmente com apoio de benefícios de acesso gratuito concedido pela universidade por meio de parcerias com provedores de IA ou cloud.
 
 ## 16. Cronograma, marcos e riscos operacionais
 
 ### 16.1 Macrocronograma (até o início da execução)
-Defina as principais datas e marcos (conclusão do plano, piloto, revisão, início da operação) com uma visão de tempo realista.
+Um cronograma realista, considerando um semestre letivo, pode ser:
+
+- Semana 1–3: refinamento do tema, leitura inicial de literatura, definição preliminar de objetivos e questões de pesquisa.
+- Semana 4–6: elaboração do plano experimental (incluindo variáveis, hipótese, desenho, instrumentos).
+- Semana 7: revisão do plano com o professor orientador, indentificação e implementação de ajustes necessários.
+- Semana 8: preparação do ambiente (instalação de ferramentas, criação de scripts, configuração de repositório).
+- Semana 9: execução do piloto com um subconjunto de prompts.
+- Semana 10: análise dos resultados do piloto e ajustes finais no processo.
+- Semana 11: início da execução completa do experimento (geração de códigos e coleta de métricas).
 
 ### 16.2 Dependências entre atividades
-Indique quais atividades dependem de outras para começar (por exemplo, treinamento após aprovação ética), deixando essas dependências claras.
+Há uma clara relação de dependência entre algumas das etapas. O piloto só pode ser executado após a configuração do ambiente e a finalização dos scripts essenciais. A execução completa do experimento, por sua vez, depende dos ajustes realizados com base no piloto. A análise estatística só pode começar quando o conjunto de dados estiver totalmente consolidado e revisado. Já a redação da seção de resultados e discussão depende da conclusão da análise estatística, embora partes da metodologia e do referencial teórico possam ser desenvolvidas previamente.
 
 ### 16.3 Riscos operacionais e plano de contingência
-Liste riscos ligados a cronograma, disponibilidade de pessoas ou recursos, e descreva ações de contingência caso esses riscos se materializem.
+Os principais riscos operacionais incluem:
+
+- Atrasos na revisão do plano pelo professor orientador, o que pode atrasar o cronograma planejado.
+- Problemas técnicos com as ferramentas de IA (indisponibilidade temporária, mudanças de API).
+- Falhas de configuração em Terraform, TFLint, Checkov ou scripts, que podem demandar retrabalho.
+- Sobrecarga do aluno pesquisador com outras disciplinas, reduzindo o tempo disponível.
+
+Como plano de contingência, o trabalho será organizado para que as partes que não dependem diretamente da execução (por exemplo, revisão bibliográfica, escrita de seções teóricas) possam avançar mesmo em caso de atraso na coleta. Além disso, serão mantidas alternativas simples para as ferramentas de IA (por exemplo, uso de interface web caso a API esteja instável) e para a análise de dados (por exemplo, fazer estatísticas descritivas em planilhas, se houver algum problema com scripts). O aluno também reservará margens de segurança no cronograma, evitando deixar toda a coleta e análise para as últimas semanas.
 
 ## 17. Governança do experimento
 
 ### 17.1 Papéis e responsabilidades formais
-Defina quem decide, quem executa, quem revisa e quem apenas deve ser informado, deixando claro o fluxo de responsabilidade.
+Na governança do experimento, o aluno pesquisador é responsável por executar as atividades diárias: implementação dos scripts, geração de códigos, execução de ferramentas e análise de resultados. O professor orientador é responsável por aprovar o plano experimental, acompanhar a execução em marcos definidos, revisar a interpretação dos resultados e garantir que o trabalho mantenha rigor acadêmico. A banca examinadora atua como instância de avaliação ao final, aprovando ou não o produto final do trabalho. Caso haja algum apoio técnico (por exemplo, de um colega experiente em infraestrutura como código Terraform), esse apoio será consultivo e não decisório.
 
 ### 17.2 Ritos de acompanhamento pré-execução
-Descreva as reuniões, checkpoints e revisões previstos antes da execução, incluindo frequência e participantes.
+Antes da execução completa do experimento, serão realizados alguns ritos de acompanhamento. Está previsto pelo menos um encontro quinzenal (ou semanal, conforme combinado) com o professor orientador para discutir o andamento, revisar decisões e ajustar o plano, se necessário. Haverá um checkpoint importante após a conclusão do piloto, em que os resultados preliminares serão apresentados ao orientador para validação do protocolo definitivo. Qualquer mudança significativa na abordagem será discutida nestes encontros e registrada em anotações ou atas.
 
 ### 17.3 Processo de controle de mudanças no plano
-Explique como mudanças no desenho ou no escopo do experimento serão propostas, analisadas, aprovadas e registradas.
+Mudanças no desenho ou no escopo do experimento seguirão um processo simples, mas organizado. Primeiro, o pesquisador identificará a necessidade de mudança (por exemplo, ajustar uma métrica, alterar a quantidade de prompts) e registrará a proposta em um documento no repositório. Em seguida, a proposta será discutida com o orientador, que poderá aprovar, rejeitar ou sugerir ajustes. Só após essa aprovação as mudanças serão aplicadas ao plano, e a versão atualizada será armazenada com histórico, usando controle de versão no Git. Isso garante que o plano executado corresponda ao que foi acordado e que o histórico de decisões fique registrado.
 
 ## 18. Plano de documentação e reprodutibilidade
 
 ### 18.1 Repositórios e convenções de nomeação
-Indique onde o plano, instrumentos, scripts e dados (futuros) serão armazenados e quais convenções de nomes serão usadas.
+Toda a documentação do experimento (plano, scripts, configurações, dados e resultados) será armazenada em um repositório privado, no GitHub. Serão adotadas convenções de nomeação simples e claras, como: `prompts/`, `scripts/`, `terraform_codes/`, `results/` e `docs/`. Arquivos de código serão nomeados com padrão que identifique IA, cloud, clareza e um identificador do prompt, seguindo o padrão: `<nome_da_cloud>_<nome_da_IA>_<nivel_de_clareza>_<numero_do_prompt>.tf`. Isso facilitará o rastreamento de cada artefato até sua origem.
 
 ### 18.2 Templates e artefatos padrão
-Liste os modelos (questionários, formulários, checklists, scripts) que serão usados e onde podem ser encontrados.
+Serão utilizados alguns templates e artefatos padrão, tais como: um modelo de planilha para registro de métricas (com colunas fixas para IA, cloud, clareza, métricas numéricas), um template de README para documentar cada pasta do repositório, scripts padrão para executar as ferramentas de análise e, se necessário, um modelo simples de checklist para o piloto (por exemplo, itens a verificar ao rodar o pipeline pela primeira vez). Esses templates ficarão disponíveis na pasta `docs/` ou `templates/` do repositório.
 
 ### 18.3 Plano de empacotamento para replicação futura
-Descreva o que será organizado desde já (documentos, scripts, instruções) para facilitar a replicação do experimento por outras equipes ou no futuro.
+Para facilitar a replicação do experimento por outros pesquisadores e pela comunidade científica, será preparado um “pacote” mínimo contendo: o plano experimental detalhado, os scripts de coleta e análise, instruções passo a passo para configurar o ambiente (incluindo versões de ferramentas), exemplos de prompts e um conjunto de dados de exemplo com poucos casos (somente para demonstração). Esse pacote poderá ser disponibilizado em um repositório público, desde que nenhum dado sensível ou credencial esteja incluído.
 
 ## 19. Plano de comunicação
 
 ### 19.1 Públicos e mensagens-chave pré-execução
-Liste os grupos que precisam ser comunicados e quais mensagens principais devem receber (objetivos, escopo, datas, impactos esperados).
+O principal público a ser comunicado antes da execução é o professor orientador, que precisa estar alinhado com objetivos, escopo, desenho e cronograma do experimento. As mensagens principais são: o objetivo do estudo (avaliar a qualidade de código Terraform gerado por IAs em contexto multi-cloud), o impacto esperado (contribuições práticas para DevOps e uso de IA em IaC) e o cronograma geral.
 
 ### 19.2 Canais e frequência de comunicação
-Defina por quais canais (e-mail, reuniões, Slack/Teams, etc.) e com que frequência as comunicações serão feitas.
+A comunicação com o orientador será feita principalmente por e-mail institucional e por meio de reuniões presenciais ou online (via Microsoft Teams), com frequência combinada semanal ou quinzenal. Se preciso, a coordenação do curso será informada pelos canais oficiais da instituição (sistema acadêmico ou e-mail institucional) nos prazos definidos para entrega de documentos formais. A comunicação com colegas, caso necessária, será feita em sala de aula, grupos de mensagens ou plataformas de colaboração usadas pela turma.
 
 ### 19.3 Pontos de comunicação obrigatórios
-Especifique os eventos que exigem comunicação formal (aprovação do plano, mudanças relevantes, adiamentos, cancelamentos).
+Alguns pontos exigem comunicação formal e registro, como a aprovação do plano experimental pelo professor orientador, que pode ser feita por e-mail; qualquer mudança relevante no escopo ou cronograma, por exemplo, alterações significativas na quantidade de prompts ou nas ferramentas utilizadas; e situações de adiamento ou cancelamento da execução planejada, caso problemas técnicos graves impeçam sua conclusão dentro do semestre. Também é importante comunicar ao orientador a conclusão de marcos importantes, como a finalização do piloto, o término da coleta de dados e o encerramento da análise.
 
 ## 20. Critérios de prontidão para execução (Definition of Ready)
 
 ### 20.1 Checklist de prontidão (itens que devem estar completos)
-Liste os itens que precisam estar finalizados e aprovados (plano, instrumentos, aprovação ética, recursos, comunicação) para autorizar o início da operação.
+Antes de iniciar a execução completa do experimento, os seguintes itens precisam estar concluídos e revisados:
+
+- Plano experimental finalizado e aprovado pelo professor orientador, incluindo objetivos, hipóteses, desenho, métricas e estratégias de análise.
+- Ambiente técnico configurado e testado (Terraform, TFLint, Checkov, Python, repositório, scripts básicos).
+- Lista de prompts final (com classificação em alta e baixa clareza, e divisão entre AWS e Azure).
+- Scripts de automação validados em um piloto (garantindo que funcionam de ponta a ponta).
+- Plano de tratamento de dados faltantes e outliers definido e documentado.
+- Cronograma detalhado de execução revisto, com margens de segurança.
+- Materiais de apoio (README, guias rápidos) prontos no repositório.
 
 ### 20.2 Aprovações finais para iniciar a operação
-Indique quem precisa dar o "ok final" (nomes ou cargos) e como esse aceite será registrado antes da execução começar.
+Para iniciar a execução completa do experimento, será necessário o “ok final” do orientador, confirmando que o plano está maduro e que os riscos foram mapeados e considerados de forma adequada. Esse aceite pode ser registrado por e-mail ou em algum outro documento específico. Se a instituição exigir alguma aprovação adicional, por exemplo, da coordenação do curso ou de uma comissão, essa aprovação também deverá estar registrada antes da execução. Somente após essas confirmações o experimento será oficialmente iniciado.
