@@ -33,7 +33,7 @@ João Vitor Romero Sales, como pesquisador principal e executor do trabalho, res
 
 ### 1.7 Projeto / produto / iniciativa relacionada
 Trabalho Final de Medição e Experimentação de Software – Engenharia de Software 
-Tema: Análise Comparativa da Qualidade de Código Terraform Gerado por Ferramentas de Inteligência Artificial em Ambientes Multi-Cloud (AWS e Azure)
+<br>Tema: Análise Comparativa da Qualidade de Código Terraform Gerado por Ferramentas de Inteligência Artificial em Ambientes Multi-Cloud (AWS e Azure)
 
 ## 2. Contexto e problema
 
