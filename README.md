@@ -81,7 +81,7 @@ Analisar a qualidade de código Terraform gerado por ferramentas de Inteligênci
 
 **O4 - Recomendações Práticas:**
 - Q4.1: Quais padrões de prompts otimizam a qualidade do código gerado pelas melhores ferramentas identificadas?
-- Q4.2: De que forma a qualidade do código afeta o tempo que os revisores humanos levam para realizar uma revisão do código IaC?
+- Q4.2: De que forma a qualidade do código impacta a Dívida Técnica (Technical Debt) estimada e o esforço potencial de correção?
 - Q4.3: Quais ferramentas complementares de linting são mais eficazes para mitigar falhas das IAs?
 
 ### 3.4 Métricas associadas (GQM)
@@ -99,7 +99,7 @@ Analisar a qualidade de código Terraform gerado por ferramentas de Inteligênci
 | | **Q3.2** Como as ferramentas diferem na detecção e mitigação automática de vulnerabilidades de segurança? | **M14.** Taxa de Redução de Vulnerabilidades por IA [%]<br>**M15.** *False Positives* em Segurança [%] |
 | | **Q3.3** Há correlação entre clareza do prompt e redução de valores *hard-coded* nas diferentes IAs? | **M16.** Correlação Prompt Qualidade-*Hard-Coded* [r Pearson]<br>**M17.** *Threshold* de Clareza [%] |
 | **O4. Recomendações Práticas** | **Q4.1** Quais padrões de prompts otimizam a qualidade do código gerado pelas melhores ferramentas identificadas? | **M18.** Eficiência de Prompts Otimizados [% melhoria]<br>**M19.** Variabilidade Intra-Prompt [DP] |
-| | **Q4.2** De que forma a qualidade do código afeta o tempo que os revisores humanos levam para realizar uma revisão do código IaC? | **M20.** Tempo Estimado de Revisão Manual [min/arquivo]<br>**M21.** Redução Estimada de Revisão [%] |
+| | **Q4.2** De que forma a qualidade do código impacta a Dívida Técnica (Technical Debt) estimada e o esforço potencial de correção? | **M20.** Índice Estimado de Dívida Técnica [score/arquivo]<br>*[...] |
 | | **Q4.3** Quais ferramentas complementares de *linting* são mais eficazes para mitigar falhas das IAs? | **M22.** Eficácia de *Linting* Complementar [% correção]<br>**M23.** Cobertura de Regras Ativas [%] |
 
 #### Tabela Completa de Métricas
@@ -156,7 +156,7 @@ O estudo será conduzido no âmbito de um trabalho do curso de Engenharia de Sof
 - Prompts elaborados são representativos de cenários DevOps reais.
 
 ### 4.4 Restrições
-- Orçamento limitado a R$300 (acesso pago às IAs e contas AWS/Azure).
+- Orçamento limitado a R$300 para créditos de API ou assinaturas mensais das ferramentas de IA.
 - Prazo de execução alinhado ao cronograma acadêmico.
 - Amostra fixa de 50 prompts (150 códigos) devido a limitações manuais de coleta.
 - Ausência de ambiente de staging dedicado; testes limitados a `plan` local.
@@ -253,19 +253,19 @@ Fator 3: Provedor de Cloud – 2 níveis: AWS, Azure.
 #### Tabela de Fatores, Tratamentos e Combinações
 | Fator 1: IA | Fator 2: Clareza | Fator 3: Cloud | Tratamento (Combinação) | n por Tratamento |
 | :-- | :-- | :-- | :-- | :-- |
-| Chat-GPT | Alta | AWS | T1 | 25 |
-| Chat-GPT | Alta | Azure | T2 | 25 |
-| Chat-GPT | Baixa | AWS | T3 | 25 |
-| Chat-GPT | Baixa | Azure | T4 | 25 |
-| Gemini | Alta | AWS | T5 | 25 |
-| Gemini | Alta | Azure | T6 | 25 |
-| Gemini | Baixa | AWS | T7 | 25 |
-| Gemini | Baixa | Azure | T8 | 25 |
-| Claude | Alta | AWS | T9 | 25 |
-| Claude | Alta | Azure | T10 | 25 |
-| Claude | Baixa | AWS | T11 | 25 |
-| Claude | Baixa | Azure | T12 | 25 |
-| **Total** |  |  | **12 tratamentos** | **300** |
+| Chat-GPT | Alta | AWS | T1 | 12 |
+| Chat-GPT | Alta | Azure | T2 | 13 |
+| Chat-GPT | Baixa | AWS | T3 | 12 |
+| Chat-GPT | Baixa | Azure | T4 | 13 |
+| Gemini | Alta | AWS | T5 | 12 |
+| Gemini | Alta | Azure | T6 | 13 |
+| Gemini | Baixa | AWS | T7 | 12 |
+| Gemini | Baixa | Azure | T8 | 13 |
+| Claude | Alta | AWS | T9 | 12 |
+| Claude | Alta | Azure | T10 | 13 |
+| Claude | Baixa | AWS | T11 | 12 |
+| Claude | Baixa | Azure | T12 | 13 |
+| **Total** |  |  | **12 tratamentos** | **150** |
 
 *Nota: Cada prompt é replicado nas 3 IAs, gerando 50 × 3 = 150 unidades; balanceamento completo.*
 
@@ -304,7 +304,7 @@ Para reduzir viés de ordem e efeitos não controlados, a ordem de execução do
 O experimento buscará manter o balanceamento entre as condições experimentais, garantindo que todas as três IAs recebam o mesmo conjunto de prompts, com a mesma proporção de prompts de alta e baixa clareza, e distribuídos entre AWS e Azure. Isso significa que cada ferramenta será avaliada nas mesmas situações, o que torna a comparação mais justa. O contrabalanço será feito variando a ordem das IAs por prompt, de forma que, ao longo do experimento, nenhuma IA seja sistematicamente favorecida por ser sempre a primeira ou a última a ser executada.
 
 ### 9.4 Número de grupos e sessões
-O desenho considera, conceitualmente, até doze grupos experimentais, formados pelas combinações entre três ferramentas de IA, dois níveis de clareza de prompt e dois provedores de cloud. Na prática, o experimento será conduzido em uma única “sessão” principal de execução, dividida em etapas: preparação dos prompts, geração dos códigos, execução das ferramentas de análise e consolidação dos resultados. A repetição de prompts ao longo das diferentes ferramentas de IA garante um número adequado de observações por combinação de fatores, sem necessidade de múltiplas sessões com participantes humanos.
+O desenho estabelece exatamente 12 grupos experimentais (tratamentos), formados pelas combinações entre três ferramentas de IA, dois níveis de clareza de prompt e dois provedores de cloud. A execução será realizada em sessões assíncronas de geração (preparação dos prompts e geração dos códigos) e coleta (execução das ferramentas de análise e consolidação dos resultados), não exigindo sessões síncronas com participantes humanos.
 
 ## 10. População, sujeitos e amostragem
 
@@ -562,13 +562,15 @@ A fonte de “financiamento” é o próprio aluno pesquisador, eventualmente co
 ### 16.1 Macrocronograma (até o início da execução)
 Um cronograma realista, considerando um semestre letivo, pode ser:
 
-- Semana 1–3: refinamento do tema, leitura inicial de literatura, definição preliminar de objetivos e questões de pesquisa.
-- Semana 4–6: elaboração do plano experimental (incluindo variáveis, hipótese, desenho, instrumentos).
-- Semana 7: revisão do plano com o professor orientador, indentificação e implementação de ajustes necessários.
-- Semana 8: preparação do ambiente (instalação de ferramentas, criação de scripts, configuração de repositório).
-- Semana 9: execução do piloto com um subconjunto de prompts.
-- Semana 10: análise dos resultados do piloto e ajustes finais no processo.
-- Semana 11: início da execução completa do experimento (geração de códigos e coleta de métricas).
+- **Semana 1–3:** Definição do problema, revisão bibliográfica e escolha das métricas (GQM).
+- **Semana 4–6:** Elaboração do plano experimental detalhado e definição dos 50 prompts (Alta/Baixa clareza).
+- **Semana 7:** Revisão do plano com orientador e ajustes metodológicos.
+- **Semana 8:** Setup técnico (Ambiente Python, Docker, TFLint, Checkov) e desenvolvimento dos scripts de automação.
+- **Semana 9:** Execução do **Piloto** (5 prompts) e validação da coleta de dados.
+- **Semana 10:** Refinamento dos scripts e tratamento de erros detectados no piloto.
+- **Semana 11:** Execução completa (Geração dos 150 códigos e análise estática).
+- **Semana 12-14:** Análise estatística dos dados, testes de hipótese e escrita da discussão.
+- **Semana 15-16:** Redação final, formatação e entrega.
 
 ### 16.2 Dependências entre atividades
 Há uma clara relação de dependência entre algumas das etapas. O piloto só pode ser executado após a configuração do ambiente e a finalização dos scripts essenciais. A execução completa do experimento, por sua vez, depende dos ajustes realizados com base no piloto. A análise estatística só pode começar quando o conjunto de dados estiver totalmente consolidado e revisado. Já a redação da seção de resultados e discussão depende da conclusão da análise estatística, embora partes da metodologia e do referencial teórico possam ser desenvolvidas previamente.
