@@ -8,20 +8,21 @@
 Análise Comparativa da Qualidade de Código Terraform Gerado por Ferramentas de Inteligência Artificial em Ambientes Multi-Cloud (AWS e Azure)
 
 ### 1.2 ID / código
-EXP-DEVOPS-IAIAC-2025
+EXP-DEVOPS-AIIAC-2025
 
 ### 1.3 Versão do documento e histórico de revisão
-Versão: v1.0
-Histórico de revisão:
- - v1.0 (21/11/2025): Versão inicial, baseada no escopo de pesquisa definido para o trabalho e contendo todos os conteúdos necessários da primeira entrega.
- - v1.1 (24/11/2025): Segunda versão, baseada no escopo de pesquisa definido para o trabalho e contendo todos os conteúdos necessários da segunda entrega.
- - v1.2 (27/11/2025): Terceira versão, baseada no escopo de pesquisa definido para o trabalho e contendo todos os conteúdos necessários da terceira entrega.
- - v1.3 (28/11/2025): Quarta versão, baseada no escopo de pesquisa definido para o trabalho e contendo todos os conteúdos necessários da quarta entrega.
- - v1.4 (29/11/2025): Quinta versão e versão final, baseada nos tópicos e conteúdos restantes, necessários para finalizar o trabalho e a última entrega.
+| Versão | Data       | Descrição                                                                                                                                  |
+| ------ | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| v1.0 | 21/11/2025 | Versão inicial do plano (Identificação dos dados, Contextualização e Definição do Problema)  |
+| v1.1 | 24/11/2025 | Versão preliminar (Inserção do Escopo, Objetivos, Stakeholders/Impacto, Riscos principais, Premissas e Critérios de Sucesso) |
+| v1.2 | 24/11/2025 | Versão preliminar (Estruturação do Modelo conceitual e hipóteses; Definição de variáveis, fatores e objetos; Desenho experimental) |
+| v1.3 | 27/11/2025 | Versão preliminar (Detalhamento da População, sujeitos e amostragem; Instrumentação/Protocolos; Plano de análise de dados na pré-execução |
+| v1.4 | 28/11/2025 | Versão preliminar (Análise de ameaças à validade e estratégias de mitigação |
+| v1.5 | 29/11/2025 | Versão Final (Planejamento de Experimento finalizado) |
 
 ### 1.4 Datas (criação, última atualização)
-Criação: 21/11/2025
-Última atualização: 29/11/2025
+- Criação: 21/11/2025
+- Última atualização: 09/12/2025
 
 ### 1.5 Autores (nome, área, contato)
 João Vitor Romero Sales, Estudante de Engenharia de Software na Pontifícia Universidade Católica de Minas Gerais, Contato: joao.sales.785111@sga.pucminas.br
@@ -39,7 +40,7 @@ Tema: Análise Comparativa da Qualidade de Código Terraform Gerado por Ferramen
 O problema central reside na adoção crescente de ferramentas de Inteligência Artificial (IA) para geração automática de código, inclusive na área de DevOps, particularmente para Infraestrutura como Código (IaC) com Terraform, mas com evidências limitadas sobre a qualidade do código produzido, especialmente em cenários multi-cloud (AWS e Azure). Isso pode introduzir vulnerabilidades de segurança, não conformidade com boas práticas (como modularidade e parametrizabilidade) e valores hard-coded, aumentando riscos de falhas em provisionamento e custos operacionais. O foco deste estudo é avaliar empiricamente a geração de código de infraestrutura feita por três ferramentas de Inteligência Artificial (Chat-GPT, Google Gemini e Claude AI), visando identificar padrões de qualidade e fornecer informações valiosas que acelerem a adoção segura de IA em fluxos de trabalho DevOps acadêmicos e profissionais, reduzindo o tempo de codificação e revisão manual.
 
 ### 2.2 Contexto organizacional e técnico
-O experimento ocorre em um contexto acadêmico de uma universidade em Belo Horizonte, Minas Gerais, Brasil, no âmbito de um curso de Engenharia de Software, cloud computing (AWS e Azure) e análise de dados. A "organização" é o ambiente de pesquisa individual do estudante, utilizando ferramentas open-source e free tiers de cloud para simulações. Tecnicamente, envolve Terraform CLI para IaC, APIs de IA para geração de código e ferramentas de análise estática como TFLint e Checkov. O processo de desenvolvimento segue práticas ágeis adaptadas para pesquisa (iterações semanais de preparação, geração e análise), com versionamento via GitHub e análise de dados via Python/Pandas.
+O experimento ocorre em um contexto acadêmico de uma universidade em Belo Horizonte, Minas Gerais, Brasil, no âmbito de um curso de Engenharia de Software, cloud computing (AWS e Azure) e análise de dados. A "organização" é o ambiente de pesquisa individual do estudante, utilizando ferramentas open-source e contas de cloud para simulações. Tecnicamente, envolve Terraform CLI para IaC, APIs de IA para geração de código e ferramentas de análise estática como TFLint e Checkov. O processo de desenvolvimento segue práticas ágeis adaptadas para pesquisa (iterações semanais de preparação, geração e análise), com versionamento via GitHub e análise de dados via Python/Pandas.
 
 ### 2.3 Trabalhos e evidências prévias (internos e externos)
 Trabalhos prévios na literatura científica incluem o estudo de Dalla Palma et al. (2020), que desenvolveu um catálogo abrangente de 46 métricas de qualidade para código IaC baseado em Ansible, abrangendo atributos como linhas de código, presença de strings hard-coded e code smells associados a defeitos. Os autores validaram o catálogo por meio de modelos preditivos, alcançando precisão de 0,70 a 0,78 e recall de 0,54 a 0,67, demonstrando a viabilidade de adaptar métricas tradicionais de engenharia de software ao contexto de IaC. Adicionalmente, Rahman et al. (2024) investigaram a avaliação de qualidade em código gerado e aprimorado por IA, propondo um framework com métricas funcionais e não funcionais para artefatos de software, incluindo análise estática de vulnerabilidades e conformidade em cenários de automação. A aplicação em datasets reais de código gerado por LLMs revelou taxas de detecção de hard-coded values de 25-35%, enfatizando a necessidade de validação empírica específica para geração assistida por IA em ambientes de desenvolvimento ágil.
@@ -52,52 +53,52 @@ No âmbito empírico, o framework proposto por Sellam et al. (2019) para a medi�
 ## 3. Objetivos e questões (Goal / Question / Metric)
 
 ### 3.1 Objetivo geral (Goal template)
-Analisar para fins de melhoria na adoção de IA em DevOps, a qualidade de código Terraform gerado por ferramentas de Inteligência Artificial (Chat-GPT, Google Gemini e Claude AI), sob a perspectiva de conformidade, segurança e manutenibilidade, em um contexto de infraestruturas multi-cloud (AWS e Azure) com 50 prompts variados em clareza.
+Analisar a qualidade de código Terraform gerado por ferramentas de Inteligência Artificial (Chat-GPT, Google Gemini e Claude AI), para fins de melhoria na adoção de IA em DevOps, sob a perspectiva de conformidade, segurança e manutenibilidade, em um contexto de infraestruturas multi-cloud (AWS e Azure).
 
 ### 3.2 Objetivos específicos
-O1: Gerar e coletar 150 amostras de código Terraform (50 prompts × 3 ferramentas de IA) representativas de cenários DevOps reais em AWS e Azure, garantindo variabilidade controlada na clareza dos prompts.
-O2: Quantificar sistematicamente as métricas de qualidade do código gerado, utilizando ferramentas de análise estática automatizadas, para caracterizar o desempenho individual de cada ferramenta de IA.
-O3: Comparar o desempenho relativo das ferramentas de IA (Chat-GPT, Google Gemini e Claude AI) em termos de conformidade, segurança e manutenibilidade, identificando padrões por provedor de cloud e tipo de prompt.
-O4: Derivar recomendações práticas e evidências empíricas para a integração segura de IA generativa em fluxos de trabalho DevOps multi-cloud, incluindo diretrizes para otimização de prompts e revisão automatizada.
+- O1: Gerar e coletar 150 amostras de código Terraform (50 prompts × 3 ferramentas de IA) representativas de cenários DevOps reais em AWS e Azure, garantindo variabilidade controlada na clareza dos prompts.
+- O2: Quantificar sistematicamente as métricas de qualidade do código gerado, utilizando ferramentas de análise estática automatizadas, para caracterizar o desempenho individual de cada ferramenta de IA.
+- O3: Comparar o desempenho relativo das ferramentas de IA (Chat-GPT, Google Gemini e Claude AI) em termos de conformidade, segurança e manutenibilidade, identificando padrões por provedor de cloud e tipo de prompt.
+- O4: Derivar recomendações práticas e evidências empíricas para a integração segura de IA generativa em fluxos de trabalho DevOps multi-cloud, incluindo diretrizes para otimização de prompts e revisão automatizada.
 
 ### 3.3 Questões de pesquisa / de negócio
 **O1 - Geração e Coleta de Amostras:**
-Q1.1: Qual é a taxa de geração bem-sucedida de código Terraform sintaticamente válido por cada ferramenta de IA?
-Q1.2: Como a clareza dos prompts influencia a completude estrutural do código gerado (presença de recursos essenciais)?
-Q1.3: Há diferenças na estruturação inicial do código gerado entre AWS e Azure para prompts equivalentes?
+- Q1.1: Qual é a taxa de geração bem-sucedida de código Terraform sintaticamente válido por cada ferramenta de IA?
+- Q1.2: Como a clareza dos prompts influencia a completude estrutural do código gerado (presença de recursos essenciais)?
+- Q1.3: Há diferenças na estruturação inicial do código gerado entre AWS e Azure para prompts equivalentes?
 
 **O2 - Quantificação de Métricas:**
-Q2.1: Qual o nível de conformidade com boas práticas de IaC exibido pelo código de cada ferramenta?
-Q2.2: Quantas vulnerabilidades de segurança são introduzidas pelo código gerado por cada IA?
-Q2.3: Qual a prevalência de valores hard-coded no código produzido por cada ferramenta?
+- Q2.1: Qual o nível de conformidade com boas práticas de IaC exibido pelo código de cada ferramenta?
+- Q2.2: Quantas vulnerabilidades de segurança são introduzidas pelo código gerado por cada IA?
+- Q2.3: Qual a prevalência de valores hard-coded no código produzido por cada ferramenta?
 
 **O3 - Comparação de Desempenho:**
-Q3.1: Qual ferramenta de IA apresenta melhor desempenho global em conformidade para AWS versus Azure?
-Q3.2: Como as ferramentas diferem na detecção e mitigação automática de vulnerabilidades de segurança?
-Q3.3: Há correlação entre clareza do prompt e redução de valores hard-coded nas diferentes IAs?
+- Q3.1: Qual ferramenta de IA apresenta melhor desempenho global em conformidade para AWS versus Azure?
+- Q3.2: Como as ferramentas diferem na detecção e mitigação automática de vulnerabilidades de segurança?
+- Q3.3: Há correlação entre clareza do prompt e redução de valores hard-coded nas diferentes IAs?
 
 **O4 - Recomendações Práticas:**
-Q4.1: Quais padrões de prompts otimizam a qualidade do código gerado pelas melhores ferramentas identificadas?
-Q4.2: De que forma a qualidade do código afeta o tempo que os revisores humanos levam para realizar uma revisão do código IaC?
-Q4.3: Quais ferramentas complementares de linting são mais eficazes para mitigar falhas das IAs?
+- Q4.1: Quais padrões de prompts otimizam a qualidade do código gerado pelas melhores ferramentas identificadas?
+- Q4.2: De que forma a qualidade do código afeta o tempo que os revisores humanos levam para realizar uma revisão do código IaC?
+- Q4.3: Quais ferramentas complementares de linting são mais eficazes para mitigar falhas das IAs?
 
 ### 3.4 Métricas associadas (GQM)
 #### Tabela GQM: Alinhamento Objetivo-Pergunta-Métrica
 
-| Objetivo | Pergunta | Métricas Associadas |
-| :-- | :-- | :-- |
-| **O1** | Q1.1 | Taxa de Validação Sintática [%], Tempo de Geração [s] |
-| **O1** | Q1.2 | Índice de Completude Estrutural [%], Cobertura de Outputs [%] |
-| **O1** | Q1.3 | Densidade de Recursos Específicos por Cloud [recursos/arquivo] |
-| **O2** | Q2.1 | Taxa de Conformidade TFLint [%], Pontuação de Boas Práticas [0-10] |
-| **O2** | Q2.2 | Contagem de Vulnerabilidades Checkov [\#], Gravidade Média de Vulnerabilidades [1-10] |
-| **O2** | Q2.3 | Contagem de Hard-Coded Values [\#], Taxa de Parametrização [%] |
-| **O3** | Q3.1 | Ranking de Conformidade por Cloud [posição 1-3], Delta Conformidade AWS-Azure [%] |
-| **O3** | Q3.2 | Taxa de Redução de Vulnerabilidades por IA [%], False Positives em Segurança [%] |
-| **O3** | Q3.3 | Correlação Prompt Qualidade-Hard-Coded [r Pearson], Threshold de Clareza [%] |
-| **O4** | Q4.1 | Eficiência de Prompts Otimizados [% melhoria], Variabilidade Intra-Prompt [DP] |
-| **O4** | Q4.2 | Tempo Estimado de Revisão Manual [min/arquivo], Redução Estimada de Revisão [%] |
-| **O4** | Q4.3 | Eficácia de Linting Complementar [% correção], Cobertura de Regras Ativas [%] |
+| Objetivo Específico | Questões de Pesquisa (Questions) | Métricas Associadas (Metrics) |
+| :--- | :--- | :--- |
+| **O1. Geração e Coleta de Amostras** | **Q1.1** Qual é a taxa de geração bem-sucedida de código Terraform sintaticamente válido por cada ferramenta de IA? | **M1.** Taxa de Validação Sintática [%]<br>**M2.** Tempo de Geração [s] |
+| | **Q1.2** Como a clareza dos prompts influencia a completude estrutural do código gerado (presença de recursos essenciais)? | **M3.** Índice de Completude Estrutural [%]<br>**M4.** Cobertura de Outputs [%] |
+| | **Q1.3** Há diferenças na estruturação inicial do código gerado entre AWS e Azure para prompts equivalentes? | **M5.** Densidade de Recursos Específicos por Cloud [recursos/arquivo] |
+| **O2. Quantificação de Métricas** | **Q2.1** Qual o nível de conformidade com boas práticas de IaC exibido pelo código de cada ferramenta? | **M6.** Taxa de Conformidade TFLint [%]<br>**M7.** Pontuação de Boas Práticas [0-10] |
+| | **Q2.2** Quantas vulnerabilidades de segurança são introduzidas pelo código gerado por cada IA? | **M8.** Contagem de Vulnerabilidades Checkov [#]<br>**M9.** Gravidade Média de Vulnerabilidades [1-10] |
+| | **Q2.3** Qual a prevalência de valores *hard-coded* no código produzido por cada ferramenta? | **M10.** Contagem de *Hard-Coded Values* [#]<br>**M11.** Taxa de Parametrização [%] |
+| **O3. Comparação de Desempenho** | **Q3.1** Qual ferramenta de IA apresenta melhor desempenho global em conformidade para AWS versus Azure? | **M12.** Ranking de Conformidade por Cloud [posição 1-3]<br>**M13.** Delta Conformidade AWS-Azure [%] |
+| | **Q3.2** Como as ferramentas diferem na detecção e mitigação automática de vulnerabilidades de segurança? | **M14.** Taxa de Redução de Vulnerabilidades por IA [%]<br>**M15.** *False Positives* em Segurança [%] |
+| | **Q3.3** Há correlação entre clareza do prompt e redução de valores *hard-coded* nas diferentes IAs? | **M16.** Correlação Prompt Qualidade-*Hard-Coded* [r Pearson]<br>**M17.** *Threshold* de Clareza [%] |
+| **O4. Recomendações Práticas** | **Q4.1** Quais padrões de prompts otimizam a qualidade do código gerado pelas melhores ferramentas identificadas? | **M18.** Eficiência de Prompts Otimizados [% melhoria]<br>**M19.** Variabilidade Intra-Prompt [DP] |
+| | **Q4.2** De que forma a qualidade do código afeta o tempo que os revisores humanos levam para realizar uma revisão do código IaC? | **M20.** Tempo Estimado de Revisão Manual [min/arquivo]<br>**M21.** Redução Estimada de Revisão [%] |
+| | **Q4.3** Quais ferramentas complementares de *linting* são mais eficazes para mitigar falhas das IAs? | **M22.** Eficácia de *Linting* Complementar [% correção]<br>**M23.** Cobertura de Regras Ativas [%] |
 
 #### Tabela Completa de Métricas
 
@@ -126,9 +127,21 @@ Q4.3: Quais ferramentas complementares de linting são mais eficazes para mitiga
 ## 4. Escopo e contexto do experimento
 
 ### 4.1 Escopo funcional / de processo (incluído e excluído)
-**Incluído:** Geração automatizada de 150 códigos Terraform (.tf) a partir de 50 prompts variados, análise estática com TFLint (rulesets AWS/Azurerm) e Checkov, quantificação de 15 métricas GQM, comparação estatística entre Chat-GPT, Google Gemini e Claude AI, elaboração de recomendações. Artefatos: repositório GitHub com códigos versionados, dataset CSV com métricas, relatório analítico com visualizações.
+**Incluído:**
+- Geração automatizada de 150 amostras de código Terraform (.tf) divididas entre AWS e Azure.
+- Aplicação de 50 prompts distintos com níveis controlados de clareza e especificidade.
+- Ferramentas de IA Generativa objeto de estudo: ChatGPT, Google Gemini e Claude AI.
+- Análise estática de código utilizando as ferramentas TFLint (rulesets AWS e Azurerm) e Checkov.
+- Coleta e análise estatística das métricas definidas no framework GQM.
+- Entrega de artefatos: repositório GitHub versionado, dataset de métricas (CSV) e guia de recomendações.
 
-**Excluído:** Execução real de provisionamento (`terraform apply`), análise dinâmica de performance em runtime, avaliação de custo computacional das IAs, testes com outras linguagens IaC (Ansible, CloudFormation), análise de experiência do usuário nas interfaces das IAs, validação em produção ou com usuários reais.
+**Excluído:**
+- Execução efetiva do provisionamento de infraestrutura (`terraform apply` ou `destroy`).
+- Análise dinâmica de desempenho ou comportamento dos recursos em tempo de execução (*runtime*).
+- Avaliação de custos financeiros ou computacionais (consumo de tokens/API) das ferramentas.
+- Outras linguagens ou frameworks de IaC (ex: Ansible, CloudFormation, Pulumi).
+- Análise de Experiência do Usuário (UX) ou usabilidade das interfaces das IAs.
+- Validação empírica com usuários reais ou implantação em ambientes de produção.
 
 ### 4.2 Contexto do estudo (tipo de organização, projeto, experiência)
 O estudo será conduzido no âmbito de um trabalho do curso de Engenharia de Software, em uma universidade brasileira localizada em Belo Horizonte, Minas Gerais, caracterizando um contexto acadêmico de pesquisa individual. O projeto possui criticidade baixa (ambiente de simulação com contas AWS/Azure), executado por estudante com experiência em DevOps (AWS, Azure, Python, Git, Terraform), estatística e experimentação controlada, mas sem exposição a equipes industriais. A infraestrutura técnica compreende execução local (máquina pessoal), ferramentas CLI open-source e acesso via web às APIs de IA.
@@ -141,7 +154,7 @@ O estudo será conduzido no âmbito de um trabalho do curso de Engenharia de Sof
 - Prompts elaborados são representativos de cenários DevOps reais.
 
 ### 4.4 Restrições
-- Orçamento limitado a R$200 (acesso pago às IAs e contas AWS/Azure).
+- Orçamento limitado a R$300 (acesso pago às IAs e contas AWS/Azure).
 - Prazo de execução alinhado ao cronograma acadêmico.
 - Amostra fixa de 50 prompts (150 códigos) devido a limitações manuais de coleta.
 - Ausência de ambiente de staging dedicado; testes limitados a `plan` local.
@@ -178,8 +191,8 @@ A generalização externa é limitada pela amostra acadêmica (50 prompts contro
 - **Dados:** Perda de dataset por falha local de backup (probabilidade muito baixa, impacto médio).
 
 ### 6.2 Critérios de sucesso globais (go / no-go)
-**Go (Sucesso):** ≥90% dos 150 códigos gerados válidos sintaticamente; variância explicada ≥70% nas comparações entre IAs; pelo menos 2 recomendações acionáveis validadas estatisticamente (p<0.05); relatório com ≥15 visualizações GQM claras.
-**No-go (Falha):** <70% códigos válidos ou nenhuma diferença estatística significativa entre IAs ou dataset incompleto (<120 códigos analisados).
+- **Go (Sucesso):** ≥90% dos 150 códigos gerados válidos sintaticamente; variância explicada ≥70% nas comparações entre IAs; pelo menos 2 recomendações acionáveis validadas estatisticamente (p<0.05); relatório com ≥15 visualizações GQM claras.
+- **No-go (Falha):** <70% códigos válidos ou nenhuma diferença estatística significativa entre IAs ou dataset incompleto (<120 códigos analisados).
 
 ### 6.3 Critérios de parada antecipada (pré-execução)
 - Indisponibilidade de acesso pago às 3 IAs simultaneamente (Chat-GPT Plus, Gemini Pro, Claude Code).
@@ -201,39 +214,21 @@ De forma simplificada, o modelo conceitual é:
 > → influenciam → Qualidade do IaC (conformidade, segurança, manutenibilidade)
 
 ### 7.2 Hipóteses formais (H0, H1)
-**Para Q1 (Conformidade por ferramenta de IA)**
+- **Conformidade e Boas Práticas (Ferramentas)**:
+  - **H0_Q1:** Não há diferença significativa nas médias de conformidade com boas práticas de IaC entre as três ferramentas de IA analisadas.
+  - **H1_Q1:** Pelo menos uma das ferramentas apresenta desempenho de conformidade distinto, com Claude AI e ChatGPT tendendo a apresentar pontuações superiores às do Google Gemini.
 
-**H0_Q1:** As médias de conformidade com boas práticas de IaC são iguais entre as três ferramentas de IA, ou seja:  
-Média_Conf_ChatGPT = Média_Conf_Gemini = Média_Conf_Claude.
+- **Segurança e Vulnerabilidades (Efeito do Prompt)**:
+  - **H0_Q2a:** A clareza do prompt (alta ou baixa) não influencia a quantidade média de vulnerabilidades de segurança detectadas no código.
+  - **H1_Q2a:** O uso de prompts de alta clareza resulta em uma redução significativa na quantidade de vulnerabilidades introduzidas em comparação aos prompts de baixa clareza.
 
-**H1_Q1:** Pelo menos uma das ferramentas de IA apresenta média de conformidade diferente, sendo esperado que Claude AI e ChatGPT apresentem, em média, uma conformidade entre **75% e 85%**, enquanto o Google Gemini apresente entre **65% e 75%**.
+- **Qualidade e Parametrização (Efeito do Prompt)**:
+  - **H0_Q2b:** A incidência média de valores *hard-coded* não difere significativamente entre códigos gerados por prompts de alta versus baixa clareza.
+  - **H1_Q2b:** Prompts de alta clareza levam a uma diminuição significativa na ocorrência de valores *hard-coded* (maior parametrização) em relação aos prompts menos claros.
 
----
-
-**Para Q2 (Efeito da clareza do prompt)**
-
-**H0_Q2a:** A média de vulnerabilidades detectadas não difere entre prompts de alta e baixa clareza, isto é:  
-Média_Vuln_Alta = Média_Vuln_Baixa.
-
-**H1_Q2a:** Prompts de alta clareza resultam em menos vulnerabilidades do que prompts de baixa clareza, com redução esperada de aproximadamente **1 a 2 vulnerabilidades por arquivo** (por exemplo, Média_Vuln_Alta ≈ 1–2 contra Média_Vuln_Baixa ≈ 3–4).
-
----
-
-**H0_Q2b:** A média de valores hard-coded não difere entre prompts de alta e baixa clareza, isto é:  
-Média_HC_Alta = Média_HC_Baixa.
-
-**H1_Q2b:** Prompts de alta clareza resultam em menos valores hard-coded do que prompts de baixa clareza, com redução esperada de **30% a 40%** (por exemplo, Média_HC_Alta ≈ 2–3 valores por arquivo e Média_HC_Baixa ≈ 4–5).
-
----
-
-**Para Q3 (Interação IA × Cloud)**
-
-**H0_Q3:** Não há interação significativa entre ferramenta de IA e provedor de cloud na taxa de valores hard-coded, ou seja, a diferença entre as ferramentas é semelhante em AWS e Azure.
-
-**H1_Q3:** Existe interação entre ferramenta de IA e provedor de cloud na taxa de valores hard-coded. Em particular:  
-- **Claude AI** tende a gerar cerca de **2 valores hard-coded em Azure** e **3–4 em AWS**.  
-- **ChatGPT** tende a gerar aproximadamente **3 valores hard-coded** em ambos os provedores.  
-- **Google Gemini** tende a manter uma taxa mais alta e estável, cerca de **4–5 valores** em ambas as clouds.
+- **Consistência entre Provedores (Interação IA × Cloud)**:
+  - **H0_Q3:** Não há interação significativa entre a ferramenta de IA e o provedor de nuvem (AWS/Azure) na taxa de valores *hard-coded*; a diferença entre as ferramentas se mantém constante independente da nuvem.
+  - **H1_Q3:** Existe uma interação significativa entre a ferramenta e o provedor, onde ferramentas específicas (como Claude AI) apresentam maior variação de desempenho e tendência a *hard-coding* em um provedor (AWS) comparado ao outro (Azure), enquanto outras mantêm estabilidade.
 
 ### 7.3 Nível de significância e considerações de poder
 Neste estudo será adotado o nível de significância α = 0,05, valor amplamente utilizado em pesquisas em engenharia de software, por oferecer um equilíbrio adequado entre risco de erro do tipo I (rejeitar a hipótese nula quando ela é verdadeira) e a necessidade de identificar efeitos relevantes. Considerando o tamanho de amostra planejado, com 50 prompts aplicados às três ferramentas de IA, resultando em 150 códigos de Terraform, espera-se obter um poder estatístico razoável para detectar efeitos de magnitude média nas comparações entre ferramentas e entre níveis de clareza de prompt. Embora o experimento não tenha o objetivo de ser um estudo estatístico de larga escala, o tamanho da amostra tende a oferecer evidências empíricas úteis sobre as hipóteses definidas, ainda que sua suficiência não tenha sido avaliada formalmente.
@@ -351,44 +346,87 @@ Esses materiais ajudam a manter o experimento reproduzível, caso algum outro pe
 O procedimento experimental seguirá uma sequência clara, desde o planejamento até a análise dos dados. Abaixo está um fluxograma textual e, em seguida, a descrição dos passos.
 
 Fluxograma (visão geral):
-```
+```text
 INÍCIO
-  ↓
-Definição dos Prompts e Cenários
-  ↓
-Configuração das Ferramentas (Terraform, TFLint, Checkov, Scripts)
-  ↓
-Geração de Código IaC (Chat-GPT, Gemini, Claude)
-  ↓
-Organização e Armazenamento dos Arquivos (.tf)
-  ↓
-Execução de terraform validate, TFLint e Checkov
-  ↓
-Extração das Métricas (scripts e planilhas)
-  ↓
-Consolidação dos Dados (dataset unificado)
-  ↓
-Análise Estatística e Interpretação dos Resultados
-  ↓
-Elaboração do Relatório e Discussão com Stakeholders (professor orientador)
-  ↓
+                          ↓
+================================================================
+FASE 1: PREPARAÇÃO
+================================================================
+                          ↓
+1. Definição de Cenários e Prompts [Manual / Revisão Bibliográfica]
+   (Elaboração de 50 enunciados cobrindo AWS/Azure com variação de clareza)
+   Output: Lista de Prompts Documentada (.md)
+                          ↓
+2. Configuração do Ambiente [Docker / CLI]
+   (Instalação e validação de Terraform, TFLint e Checkov)
+   Output: Ambiente de Execução Validado
+                          ↓
+================================================================
+FASE 2: COLETA (GERAÇÃO)
+================================================================
+                          ↓
+3. Submissão aos Modelos [Interface Web / API]
+   (Envio dos prompts para ChatGPT, Gemini e Claude AI)
+   Output: Snippets de Código Bruto
+                          ↓
+4. Higienização e Armazenamento [Script Python]
+   (Extração dos blocos de código e salvamento padronizado)
+   Output: Diretórios de Arquivos .tf organizados
+                          ↓
+================================================================
+FASE 3: EXTRAÇÃO (AUDITORIA)
+================================================================
+                          ↓
+5. Validação Sintática [Terraform CLI]
+   (Execução de `terraform validate` em cada arquivo)
+   Output: Logs de Validação (Sucesso/Erro)
+                          ↓
+6. Análise Estática de Qualidade [TFLint]
+   (Execução com rulesets AWS e Azurerm)
+   Output: Relatórios de Conformidade (JSON)
+                          ↓
+7. Varredura de Segurança [Checkov]
+   (Scan de políticas de segurança e más práticas)
+   Output: Relatórios de Vulnerabilidade (JSON/XML)
+                          ↓
+================================================================
+FASE 4: CONSOLIDAÇÃO
+================================================================
+                          ↓
+8. Parsing de Logs e Relatórios [Script Python / Pandas]
+   (Leitura estruturada dos outputs das ferramentas)
+   Output: DataFrame Bruto
+                          ↓
+9. Cálculo de Métricas GQM [Script Python]
+   (Computação de taxas, densidades e normalização de scores)
+   Output: Dataset Final Unificado (.csv)
+                          ↓
+================================================================
+FASE 5: ANÁLISE
+================================================================
+                          ↓
+10. Análise Exploratória - [Jupyter / Matplotlib]
+    (Geração de histogramas, boxplots e estatística descritiva)
+    Output: Gráficos de Distribuição e Tabelas
+                          ↓
+11. Testes Estatísticos [Scipy / Statsmodels]
+    (Execução de testes de hipótese para comparar IAs e Prompts)
+    Output: Resultados de Significância (p-values)
+                          ↓
+================================================================
+FASE 6: DOCUMENTAÇÃO
+================================================================
+                          ↓
+12. Síntese e Discussão [Reunião de Orientação]
+    (Interpretação dos dados à luz das hipóteses iniciais)
+    Output: Definição das Conclusões e Recomendações
+                          ↓
+13. Redação do texto final [LaTeX]
+    (Elaboração do texto acadêmico e formatação)
+    Output: Relatório Final / TCC
+                          ↓
 FIM
 ```
-
-Passo a passo em texto:
-
-1. Definir os 50 prompts, separando claramente quais são de alta e quais são de baixa clareza, e dividindo entre cenários AWS e Azure.
-2. Configurar o ambiente local: instalar Terraform, TFLint, Checkov, Python e bibliotecas necessárias, além de criar arquivos de configuração (por exemplo, .tflint.hcl).
-3. Criar scripts em Python ou shell para automatizar a chamada das ferramentas, a leitura dos arquivos .tf e o cálculo das métricas.
-4. Para cada prompt, executá-lo via API nas três ferramentas de IA (Chat-GPT, Gemini e Claude) e salvar as respostas em arquivos .tf organizados em pastas por IA e por cloud.
-5. Executar o comando `terraform validate` para cada arquivo, registrando se o código é sintaticamente válido.
-6. Executar TFLint com os plugins para AWS e Azure, coletando informações de conformidade com boas práticas.
-7. Executar Checkov para identificar vulnerabilidades de segurança em cada arquivo.
-8. Executar os scripts de análise para contar valores hard-coded, consolidar as métricas e gerar uma planilha com todas as informações.
-9. Revisar a planilha para verificar se não há erros visíveis ou dados faltantes.
-10. Importar os dados para uma ferramenta de análise (por exemplo, Python com pandas) para produzir tabelas, gráficos e estatísticas descritivas.
-11. Executar os testes estatísticos planejados (por exemplo, ANOVA, testes de diferença de médias), interpretar os resultados em relação às hipóteses e registrar as conclusões.
-12. Escrever a seção de resultados e discussão do trabalho, incluindo implicações para equipes DevOps e recomendações de uso das IAs.
 
 ### 11.4 Plano de piloto (se haverá piloto, escopo e critérios de ajuste)
 Antes de rodar o experimento completo, será feito um piloto com um subconjunto de dados:
