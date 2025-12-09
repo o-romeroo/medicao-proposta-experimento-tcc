@@ -19,6 +19,7 @@ EXP-DEVOPS-AIIAC-2025
 | v1.3 | 27/11/2025 | Versão preliminar (Detalhamento da População, sujeitos e amostragem; Instrumentação/Protocolos; Plano de análise de dados na pré-execução |
 | v1.4 | 28/11/2025 | Versão preliminar (Análise de ameaças à validade e estratégias de mitigação |
 | v1.5 | 29/11/2025 | Versão Final (Planejamento de Experimento finalizado) |
+| v1.6 | 09/12/2025 | Versão Final (Mudanças estéticas e melhoria no texto) |
 
 ### 1.4 Datas (criação, última atualização)
 - Criação: 21/11/2025
