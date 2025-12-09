@@ -243,9 +243,9 @@ Os objetos de estudo consistem em 150 arquivos de código Terraform (.tf) gerado
 O estudo não envolve participantes humanos além do próprio pesquisador. Não há desenvolvedores ou usuários finais diretamente envolvidos na execução do experimento. O pesquisador atua como responsável pela elaboração dos prompts, pela interação com as ferramentas de IA, pela configuração das ferramentas de análise e pela interpretação dos resultados. As ferramentas de IA (Chat-GPT, Google Gemini e Claude AI) são tratadas como ferramentas automatizadas que produzem os artefatos a serem avaliados.
 
 ### 8.3 Variáveis independentes (fatores) e seus níveis
-Fator 1: Ferramenta de IA – 3 níveis: Chat-GPT, Google Gemini, Claude AI.
-Fator 2: Clareza do Prompt – 2 níveis: Alta (detalhada, com especificações de boas práticas), Baixa (genérica, ambígua).
-Fator 3: Provedor de Cloud – 2 níveis: AWS, Azure.
+- Fator 1: Ferramenta de IA – 3 níveis: Chat-GPT, Google Gemini, Claude AI.
+- Fator 2: Clareza do Prompt – 2 níveis: Alta (detalhada, com especificações de boas práticas), Baixa (genérica, ambígua).
+- Fator 3: Provedor de Cloud – 2 níveis: AWS, Azure.
 
 ### 8.4 Tratamentos (condições experimentais)
 
