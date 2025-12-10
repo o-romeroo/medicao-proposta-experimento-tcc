@@ -162,7 +162,7 @@ O estudo será conduzido no âmbito de um trabalho do curso de Engenharia de Sof
 - Dependência de disponibilidade das APIs de IA (limites de taxa, filas).
 
 ### 4.5 Limitações previstas
-A generalização externa é limitada pela amostra acadêmica (50 prompts controlados vs uso orgânico em produção), ausência de validação com desenvolvedores reais e foco exclusivo em Terraform (não generaliza para outros IaC). Viés de seleção pode ocorrer por prompts elaborados pelo autor. A análise estática não captura falhas de runtime ou performance. Resultados são específicos às versões de IA de Novembro de 2025 e podem depreciar com atualizações dos modelos.
+A generalização externa é limitada pela amostra acadêmica (150 prompts controlados vs uso orgânico em produção), ausência de validação com desenvolvedores reais e foco exclusivo em Terraform (não generaliza para outros IaC). Viés de seleção pode ocorrer por prompts elaborados pelo autor. A análise estática não captura falhas de runtime ou performance. Resultados são específicos às versões de IA de Novembro de 2025 e podem depreciar com atualizações dos modelos.
 
 ## 5. Stakeholders e impacto esperado
 
