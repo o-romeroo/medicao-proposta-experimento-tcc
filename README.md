@@ -162,7 +162,7 @@ O estudo será conduzido no âmbito de um trabalho do curso de Engenharia de Sof
 - Dependência de disponibilidade das APIs de IA (limites de taxa, filas).
 
 ### 4.5 Limitações previstas
-A generalização externa é limitada pela amostra acadêmica (150 prompts controlados vs uso orgânico em produção), ausência de validação com desenvolvedores reais e foco exclusivo em Terraform (não generaliza para outros IaC). Viés de seleção pode ocorrer por prompts elaborados pelo autor. A análise estática não captura falhas de runtime ou performance. Resultados são específicos às versões de IA de Novembro de 2025 e podem depreciar com atualizações dos modelos.
+A generalização externa é limitada pela amostra acadêmica (50 prompts controlados vs uso orgânico em produção), ausência de validação com desenvolvedores reais e foco exclusivo em Terraform (não generaliza para outros IaC). Viés de seleção pode ocorrer por prompts elaborados pelo autor. A análise estática não captura falhas de runtime ou performance. Resultados são específicos às versões de IA de Novembro de 2025 e podem depreciar com atualizações dos modelos.
 
 ## 5. Stakeholders e impacto esperado
 
@@ -179,8 +179,8 @@ A generalização externa é limitada pela amostra acadêmica (150 prompts contr
 - **Engenheiros DevOps:** Recomendações práticas para seleção de IAs e otimização de prompts em workflows multi-cloud.
 
 ### 5.3 Impactos potenciais no processo / produto
-**Durante execução:** Carga de trabalho concentrada, possível exaustão por coleta manual de prompts. Sem impacto no produto final, pois trata-se de um estudo isolado.
-**Após execução:** Repositório GitHub como asset permanente, dataset reutilizável para meta-análises, potencial para guidelines. Nenhum impacto negativo previsto em prazos/produtos existentes. Melhoria indireta na maturidade DevOps acadêmica e nas empresas via disseminação de boas práticas.
+- **Durante execução:** Carga de trabalho concentrada, possível exaustão por coleta manual de prompts. Sem impacto no produto final, pois trata-se de um estudo isolado.
+- **Após execução:** Repositório GitHub como asset permanente, dataset reutilizável para meta-análises, potencial para guidelines. Nenhum impacto negativo previsto em prazos/produtos existentes. Melhoria indireta na maturidade DevOps acadêmica e nas empresas via disseminação de boas práticas.
 
 ## 6. Riscos de alto nível, premissas e critérios de sucesso
 
@@ -269,13 +269,30 @@ O estudo não envolve participantes humanos além do próprio pesquisador. Não 
 *Nota: Cada prompt é replicado nas 3 IAs, gerando 50 × 3 = 150 unidades; balanceamento completo.*
 
 ### 8.5 Variáveis dependentes (respostas)
-As variáveis dependentes são as medidas de resultado observadas para cada código gerado. As principais variáveis dependentes são: a conformidade com boas práticas de IaC, que será medida por meio da análise com TFLint e de um checklist de boas práticas; a quantidade de vulnerabilidades de segurança, identificadas por ferramentas como Checkov; a quantidade de valores hard-coded presentes no código, detectados por meio de scripts de análise; e a validação sintática do código, verificada com o comando “terraform validate”. Essas medidas representam a resposta do sistema à combinação de fatores aplicada.
+As variáveis dependentes são as medidas de resultado observadas para cada código gerado. As principais variáveis dependentes são: 
+- a conformidade com boas práticas de IaC, que será medida por meio da análise com TFLint e de um checklist de boas práticas;
+- a quantidade de vulnerabilidades de segurança, identificadas por ferramentas como Checkov;
+- a quantidade de valores hard-coded presentes no código, detectados por meio de scripts de análise;
+- a validação sintática do código, verificada com o comando “terraform validate”.<br>
+
+Essas medidas representam a resposta do sistema à combinação de fatores aplicada.
 
 ### 8.6 Variáveis de controle / bloqueio
-Alguns fatores não serão estudados diretamente, mas precisam ser mantidos constantes para evitar influenciar os resultados. Entre eles estão as versões equivalentes das ferramentas de IA utilizadas (por exemplo, versões específicas dos modelos Chat-GPT, Gemini e Claude), a versão do Terraform, do TFLint e do Checkov, o ambiente de execução (mesmo computador e sistema operacional) e a estrutura básica dos prompts (seguindo um formato padrão). Esses aspectos serão tratados como variáveis de controle.
+Alguns fatores não serão estudados diretamente, mas precisam ser mantidos constantes para evitar influenciar os resultados. Entre eles estão:
+- as versões equivalentes das ferramentas de IA utilizadas (por exemplo, versões específicas dos modelos Chat-GPT, Gemini e Claude);
+- a versão do Terraform, do TFLint e do Checkov;
+- o ambiente de execução (mesmo computador e sistema operacional);
+- a estrutura básica dos prompts (seguindo um formato padrão).<br>
+
+Esses aspectos serão tratados como variáveis de controle.
 
 ### 8.7 Possíveis variáveis de confusão conhecidas
-Algumas variáveis de confusão são reconhecidas e podem influenciar os resultados, mesmo não sendo controladas totalmente. Entre elas estão as variações aleatórias das respostas das IAs, devido à natureza probabilística dos modelos; pequenas diferenças na interpretação de prompts semelhantes; e diferenças na maturidade e na documentação entre serviços de AWS e Azure que podem favorecer uma ou outra ferramenta em determinados cenários. Essas variáveis serão monitoradas na interpretação dos resultados, mas não serão objeto central do estudo.
+Algumas variáveis de confusão são reconhecidas e podem influenciar os resultados, mesmo não sendo controladas totalmente. Entre elas estão:
+- as variações aleatórias das respostas das IAs, devido à natureza probabilística dos modelos;
+- pequenas diferenças na interpretação de prompts semelhantes;
+- diferenças na maturidade e na documentação entre serviços de AWS e Azure que podem favorecer uma ou outra ferramenta em determinados cenários.<br>
+
+Essas variáveis serão monitoradas na interpretação dos resultados, mas não serão objeto central do estudo.
 
 #### Tabela Completa de Variáveis
 
@@ -482,7 +499,7 @@ No contexto deste experimento, algumas ameaças de validade interna, que estão 
 Para reduzir essas ameaças, serão adotadas algumas estratégias: fixar versões das ferramentas sempre que possível (Terraform, TFLint, Checkov, bibliotecas usadas), registrar as versões dos modelos de IA e a data de execução, automatizar a execução com scripts que tratem todas as combinações de forma padronizada, randomizar a ordem de geração dos códigos e de execução das análises e registrar logs de cada etapa para facilitar a rastreabilidade. Com isso, busca-se garantir que a única diferença sistemática entre grupos seja a combinação de fatores do experimento (ferramenta de IA, clareza do prompt, provedor de cloud).
 
 ### 13.3 Validade de constructo
-Neste trabalho, as principais ameaças de validade do constructo, que procura compreender se o que está sendo medido de fato representa os conceitos teóricos de interesse são: “qualidade do IaC”, “conformidade com boas práticas” e “segurança do código”. Existe o risco de usar métricas que não capturem bem esses conceitos, ou de interpretá-las de forma ambígua.
+Neste trabalho, as principais ameaças de validade do constructo, que procura compreender se o que está sendo medido de fato representa os conceitos teóricos de interesse são: qualidade do IaC, conformidade com boas práticas e segurança do código. Existe o risco de usar métricas que não capturem bem esses conceitos, ou de interpretá-las de forma ambígua.
 
 Para mitigar isso, as métricas foram escolhidas com base na literatura e em práticas da área: conformidade medida por regras de ferramentas como TFLint, segurança medida por vulnerabilidades apontadas pelo Checkov e manutenibilidade aproximada pela presença de valores hard-coded. Além disso, os instrumentos (configs de TFLint, políticas do Checkov e scripts de contagem) serão descritos claramente, permitindo que o leitor entenda o que cada métrica captura. Na discussão dos resultados, será sempre feita a ponte explícita entre métrica e conceito (por exemplo, explicar por que menos hard-coded sugere melhor manutenibilidade), evitando extrapolações além do que as medidas suportam.
 
